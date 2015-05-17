@@ -1,0 +1,9 @@
+# Typings used by Visual Studio Code
+**/typings/
+**/tsd.json
+
+# NPM Modules
+**/node_modules/
+
+# Dev Sqlite database and Seeding scripts
+**/database/
