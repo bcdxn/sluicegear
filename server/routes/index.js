@@ -10,9 +10,9 @@ module.exports = function (server, router) {
   require('./coupon')(server.get('Api'), router); // Coupon API Routes
   require('./order')(server.get('Api'), router) // Order API Routes
   
-  router.get('*', function (req, res) {
-    res.status(200).json({'wat': 'wat'});
-  });
+//  router.get('*', function (req, res) {
+//    res.status(200).json({'wat': 'wat'});
+//  });
   
   server.use(router);
 };
