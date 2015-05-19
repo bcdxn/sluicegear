@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "browserify": "^10.2.0",
+    "flux": "^2.0.3",
     "gulp": "^3.8.11",
     "gulp-concat": "^2.5.2",
     "gulp-html-replace": "^1.4.5",
