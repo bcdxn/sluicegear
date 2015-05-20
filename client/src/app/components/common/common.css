@@ -30,17 +30,17 @@
 
 .btn-grp > .btn.middle-btn {
   border-radius: 0;
+  border-right: none;
 }
 
 .btn-grp > .btn.right-btn {
   border-bottom-left-radius: 0;
-  border-left: none;
   border-top-left-radius: 0;
 }
 
 .btn.blue {
   background: none;
-  border-color: #007aff;
+  border: 2px solid #007aff;
   color: #007aff;
 }
 .btn.blue.solid {
@@ -50,11 +50,21 @@
 
 .btn.green {
   background: none;
-  border-color: #68be79;
+  border: 2px solid #68be79;
   color: #68be79;
 }
 .btn.green.solid {
   background: #68be79;
+  color: #fff;
+}
+
+.btn.gray {
+  background: none;
+  border: 2px solid #7e8e9e;
+  color: #7e8e9e;
+}
+.btn.gray.solid {
+  background: #7e8e9e;
   color: #fff;
 }
 
