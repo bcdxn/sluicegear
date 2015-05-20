@@ -4,7 +4,7 @@ var CartItemList = React.createClass({
   render: function () {
     var itemNodes =  this.props.items.map(function (item) {
       return (
-        <li><CartItem sku={item.sku} description={item.description} price={item.price}/></li>
+        <li><CartItem item={item}/></li>
       );
     });
     
@@ -17,3 +17,5 @@ var CartItemList = React.createClass({
 });
 
 module.exports = CartItemList;
+
+//sku={item.sku} description={item.description} price={item.price}
