@@ -121,12 +121,14 @@ var path = {
 
 // Copy over index.html to dist
 gulp.task('html', function(){
+  console.log('----HTML UPDATED----');
   gulp.src(path.HTML)
       .pipe(gulp.dest(path.DIST));
 });
 
 // Concat and minify CSS
 gulp.task('css', function () {
+  console.log('----CSS UPDATED----');
   gulp.src(path.CSS)
       .pipe(concat(path.OUT_CSS))
       .pipe(gulp.dest(path.DIST))
@@ -137,6 +139,7 @@ gulp.task('css', function () {
 
 //mWatch changes to JS
 gulp.task('js', function() {
+  console.log('----JS UPDATED----');
   browserify(path.JS_ENTRY_POINT)
     .transform(reactify)
     .bundle()
@@ -149,19 +152,16 @@ gulp.task('js', function() {
 
 // Watch changes to HTML
 gulp.task('watchHtml', function () {
-  console.log('----HTML UPDATED----');
   gulp.watch(path.HTML, ['html']);
 });
 
 // Watch changes to CSS
 gulp.task('watchCss', function () {
-  console.log('----CSS UPDATED----');
   gulp.watch(path.CSS, ['css']);
 });
 
 // Watch changes to JS
 gulp.task('watchJs', function () {
-  console.log('----JS UPDATED----');
   gulp.watch(path.JS, ['js']);
 });                               
 
