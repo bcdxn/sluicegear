@@ -1,14 +1,8 @@
 var CartItemList  = require('../cart-item-list'),
     classNames    = require('classnames'),
-    CartItemStore = require('../../stores/cart-items-store'),
-    React         = require('react');
+    CartItemStore = require('../../stores/cart-items-store');
 
 var Cart = React.createClass({
-  propTypes: {
-    freeShippingMin: React.PropTypes.number,
-    shippingPrice: React.PropTypes.number,
-    items: React.PropTypes.items
-  },
   getDefaultProps: function () {
     return {
       freeShippingMin: 15000,
