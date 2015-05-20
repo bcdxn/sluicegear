@@ -1,11 +1,9 @@
 var CartItemStore      = require('../../stores/cart-items-store'),
-    CartActionCreators = require('../../actions/CartActionCreators.js');
+    CartItemsActionCreators = require('../../actions/cart-items-action-creators.js');
 
 var CartItem = React.createClass({
   removeItem: function (id) {
-//    var id = e.target.parentNode.getAttribute('cart-item-id');
-    
-    CartActionCreators.removeItem(id);
+    CartItemsActionCreators.removeItem(id);
   },
   
   render: function () {

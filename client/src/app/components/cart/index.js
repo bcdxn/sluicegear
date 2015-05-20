@@ -1,6 +1,8 @@
-var CartItemList  = require('../cart-item-list'),
-    classNames    = require('classnames'),
-    CartItemStore = require('../../stores/cart-items-store');
+var CartItemList       = require('../cart-item-list'),
+    classNames         = require('classnames'),
+    CartStore          = require('../../stores/cart-store'),
+    CartItemsStore     = require('../../stores/cart-items-store'),
+    CartActionCreators = require('../../actions/cart-action-creators.js');
 
 var Cart = React.createClass({
   getDefaultProps: function () {
@@ -10,16 +12,22 @@ var Cart = React.createClass({
       emptyCartMsg: 'Your cart is empty'
     };
   },
+  
   getInitialState: function () {
     return {
       // Display logic attributes
+      'isCartVisible': CartStore.isCartVisible(),
       'cartHeight': window.innerHeight,
       // Business logic attributes
       'salesTax':   0,
       'adjustment': 0,
-      'items':      CartItemStore.getAll(),
+      'items':      CartItemsStore.getAll(),
       'coupon':     {}
     };
+  },
+  
+  hideCart: function () {
+    CartActionCreators.hideCart();
   },
 
   handleResize: function (e) {
@@ -28,16 +36,23 @@ var Cart = React.createClass({
 
   componentDidMount: function () {
     window.addEventListener('resize', this.handleResize);
-    CartItemStore.addChangeListener(this._onChange);
+    CartItemsStore.addChangeListener(this._onCartItemsChange);
+    CartStore.addChangeListener(this._onCartVisibilityChange);
   },
 
   componentWillUnmount: function () {
     window.removeEventListener('resize', this.handleResize);
-    CartItemStore.removeChangeListener(this._onChange);
+    CartItemsStore.removeChangeListener(this._onCartItemsChange);
+    CartStore.removeChangeListener(this._onCartVisibilityChange);
   },
   
-  _onChange: function () {
-    this.setState({ 'items': CartItemStore.getAll() });
+  _onCartItemsChange: function () {
+    this.setState({ 'items': CartItemsStore.getAll() });
+  },
+  
+  _onCartVisibilityChange: function () {
+    console.log('visibilty change ' + CartStore.isCartVisible())
+    this.setState({ 'isCartVisible': CartStore.isCartVisible() });
   },
 
   render: function () {
@@ -47,6 +62,7 @@ var Cart = React.createClass({
         cartClasses = classNames({
           'shopping-cart':       true,
           'shopping-cart-empty': this.state.items.length < 1,
+          'show-shopping-cart':  this.state.isCartVisible
         }),
         checkoutBtnClasses = classNames({
           'btn': true, 'green': true, 'solid': true, 'right-btn': true,
@@ -69,7 +85,7 @@ var Cart = React.createClass({
       <div className={cartClasses} style={cartStyle}>
         <div className='shopping-cart-global-ctrls'>
           <div className='btn-grp'>
-            <button className='btn blue solid left-btn shadow cart-close-btn'>Keep Shopping</button>
+            <button className='btn blue solid left-btn shadow cart-close-btn' onClick={this.hideCart.bind(null)}>Keep Shopping</button>
             <button className={checkoutBtnClasses}>Checkout</button>
           </div>
         </div>

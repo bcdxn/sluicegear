@@ -5,8 +5,8 @@ var keyMirror = require('keymirror');
 module.exports = {
 
   ActionTypes: keyMirror({
-    SHOW_CART: null,
-    HIDE_CART: null
+    ADD_ITEM:    null,
+    REMOVE_ITEM: null
   })
 
 };

@@ -1,6 +1,7 @@
 .shopping-cart {
   background: #fff;
   border-left: 1px solid #ccc;
+  display: none;
   font-family: 'Open Sans Condensed', Helvetica, Arial, sans-serif;
   max-width: 450px;
   overflow: auto;
@@ -8,7 +9,9 @@
   right: 0;
   top: 0;
   width: 100%;
+  z-index: 100;
 }
+.shopping-cart.show-shopping-cart { display: block; }
 
 .shopping-cart-empty {
   background: #eee;

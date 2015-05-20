@@ -1,9 +1,9 @@
-var Dispatcher    = require('../dispatcher'),
-    CartConstants = require('../constants/cart-constants'),
-    assign        = require('object-assign'),
-    EventEmitter  = require('events').EventEmitter,
-    _cartItems    = [],
-    CartStore;
+var Dispatcher           = require('../dispatcher'),
+    CartItemsActionTypes = require('../constants/cart-items-constants').ActionTypes,
+    assign               = require('object-assign'),
+    EventEmitter         = require('events').EventEmitter,
+    _cartItems           = [],
+    CartItemsStore;
     
 // TEMP
 _addCartItem({'sku': 'SIN-R', 'description': 'Single-wide red hammock', 'price': 5995 });
@@ -31,7 +31,7 @@ function _removeCartItem(id) {
   });
 }
 
-CartStore = assign({}, EventEmitter.prototype, {
+CartItemsStore = assign({}, EventEmitter.prototype, {
   emitChange: function() {
     this.emit('change');
   },
@@ -53,20 +53,20 @@ CartStore = assign({}, EventEmitter.prototype, {
   }
 });
 
-CartStore.dispatchToken = Dispatcher.register(function(action) {
+CartItemsStore.dispatchToken = Dispatcher.register(function(action) {
   switch(action.type) {
-    case CartConstants.ActionTypes.ADD_ITEM:
+    case CartItemsActionTypes.ADD_ITEM:
       _addCartItem({
         'sku':         action.newItem.sku,
         'description': action.newItem.sku,
         'price':       action.newItem.price
       });
-      CartStore.emitChange();
+      CartItemsStore.emitChange();
       break;
     
-    case CartConstants.ActionTypes.REMOVE_ITEM:
+    case CartItemsActionTypes.REMOVE_ITEM:
       _removeCartItem(action.itemId);
-      CartStore.emitChange();
+      CartItemsStore.emitChange();
       break
     
     default:
@@ -75,4 +75,4 @@ CartStore.dispatchToken = Dispatcher.register(function(action) {
   }
 });
 
-module.exports = CartStore;
+module.exports = CartItemsStore;
