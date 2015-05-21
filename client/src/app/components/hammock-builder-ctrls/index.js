@@ -61,6 +61,9 @@ var HammockBuilderCtrls = React.createClass({
     
     return (
       <div className={classes}>
+        <div className='row builder-ctrls-lbl'>
+          Choose my hammock model
+        </div>
         <div className='row btn-grp ptm'>
           <button className='btn gray left-btn shadow builder-ctrls-model-btn model-single-btn'
               onClick={this.setHammockModel.bind(this, Constants.Models.SINGLE)}>

@@ -33,8 +33,8 @@ var HammockBuilder = React.createClass({
     return (
       <div className='hammock-builder container-fluid'>
         <div className='row'>
-          <div className='col-md-8 col-sm-12'></div>
-          <div className='col-md-4 col-sm-12'>
+          <div className='col-md-8 col-sm-12 ptl'></div>
+          <div className='col-md-4 col-sm-12 ptl'>
             <HammockBuilderCtrls
               model={this.state.model}
               primaryColor={this.state.primaryColor}
