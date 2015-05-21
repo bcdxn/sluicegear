@@ -1,3 +1,106 @@
 .builder-ctrls-model-btn {
-  width: 33%;
+  font-family: 'Open Sans Condensed', Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  width: 33.3333%;
+}
+
+.hammock-builder-ctrls.single-selected .model-single-btn,
+.hammock-builder-ctrls.double-selected .model-double-btn,
+.hammock-builder-ctrls.hammie-selected .model-hammie-btn {
+  background: #7e8e9e;
+  color: #fff;
+}
+
+.builder-ctrls-msg-box {
+  border: 1px solid;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  line-height: 150%;
+  width: 100%;
+}
+
+.builder-ctrls-lbl {
+  font-family: 'Open Sans Condensed', Helvetica, Arial, sans-serif;
+  font-size: 18px;
+}
+
+.builder-ctrls-separator > .inner {
+  background: #ccc;
+  height: 1px;
+  width: 100%;
+}
+
+.optional-section {
+  max-height: 300px;
+  opacity: 1;
+  overflow: hidden;
+  transition: max-height 0.25s linear, opacity 0.5s linear, padding 0.25s linear;
+}
+
+.optional-section.folded {
+  max-height: 0;
+  opacity: 0;
+  padding-bottom: 0;
+}
+
+.builder-ctrls-fabric-btn {
+  box-sizing: border-box;
+  background-repeat: repeat;
+  height: 55px;
+}
+
+.fabric-btn-inner {
+  border-radius: 4px;
+  cursor: pointer;
+  height: 100%;
+  opacity: 0.5;
+  transition: opacity 0.1s linear;
+  width: 100%;
+}
+.fabric-btn-inner.selected { opacity: 1.0; }
+.fabric-btn-inner:hover { opacity: 1.0; }
+
+.builder-ctrls-fabric-btn > .red-fabric { background-image: url('/img/colors/red.png'); }
+.builder-ctrls-fabric-btn > .blue-fabric { background-image: url('/img/colors/blue.png'); }
+.builder-ctrls-fabric-btn > .tan-fabric { background-image: url('/img/colors/tan.png'); }
+.builder-ctrls-fabric-btn > .burgundy-fabric { background-image: url('/img/colors/burgundy.png'); }
+.builder-ctrls-fabric-btn > .turquoise-fabric { background-image: url('/img/colors/turquoise.png'); }
+.builder-ctrls-fabric-btn > .black-fabric { background-color:#000; }
+
+.primary-color-choices.red .red-fabric,
+.primary-color-choices.blue .blue-fabric,
+.primary-color-choices.tan .tan-fabric,
+.primary-color-choices.burgundy .burgundy-fabric,
+.primary-color-choices.turquoise .turquoise-fabric,
+.primary-color-choices.black .black-fabric,
+.secondary-color-choices.red .red-fabric,
+.secondary-color-choices.blue .blue-fabric,
+.secondary-color-choices.tan .tan-fabric,
+.secondary-color-choices.burgundy .burgundy-fabric,
+.secondary-color-choices.turquoise .turquoise-fabric,
+.secondary-color-choices.black .black-fabric
+{
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.8);
+  opacity: 1.0;
+}
+
+.straps-lbl {
+  float: left;
+}
+
+.straps-toggler {
+  float: right;
+}
+
+.builder-build-price {
+  color: #616161;
+  font-family: 'Open Sans Condensed', Helvetica, Arial, sans-serif;
+  font-size: 32px;
+}
+
+.add-to-cart-btn {
+  font-family: 'Open Sans Condensed', Helvetica, Arial, sans-serif;
+  font-size: 26px;
+  width: 100%;
 }

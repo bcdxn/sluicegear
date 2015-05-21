@@ -1,0 +1,71 @@
+/* Toggler Style
+------------------------------------------------------------------------------*/
+.toggler-wrapper {
+  cursor: pointer;
+  -moz-user-select: none; 
+  -khtml-user-select: none; 
+  -webkit-user-select: none; 
+  -o-user-select: none; 
+  user-select: none;
+}
+.toggler-wrapper:after {
+  content: "."; 
+  visibility: hidden; 
+  display: block; 
+  height: 0; 
+  clear: both;
+}
+.toggler { cursor: pointer; float: left; }
+.toggler-wrapper.large .toggler {
+  border-radius: 0.75em;
+  height: 1.5em;
+  width: 2.25em;
+}
+.toggler-wrapper.small .toggler {
+  border-radius: 0.5em;
+  height: 1em;
+  width: 1.5em;
+}
+
+.toggler.on { background: #1cb841; }
+.toggler.off {background: #bbb; }
+
+.toggler .toggler-switch {
+  background: #fff;
+  position: relative;
+    -webkit-transition: left 0.075s ease-in-out;
+    -moz-transition: left 0.075s ease-in-out;
+    transition: left 0.075s ease-in-out;
+}
+
+.toggler-wrapper.large .toggler .toggler-switch {
+  border-radius: 0.6125em;
+  height: 1.25em;
+  left: 0.125em;
+  top: 0.125em;
+  width: 1.25em;
+}
+.toggler-wrapper.small .toggler .toggler-switch {
+  border-radius: 0.4375em;
+  height: 0.875em;
+  left: 0.06125em;
+  top: 0.06125em;
+  width: 0.875em;
+}
+
+.toggler-wrapper.large .toggler.on .toggler-switch { left: 0.875em; }
+.toggler-wrapper.large .toggler.off .toggler-switch { left: 0.125em; }
+.toggler-wrapper.small .toggler.on .toggler-switch { left: 0.56375em; }
+.toggler-wrapper.small .toggler.off .toggler-switch { left: 0.0625em; }
+
+.toggler-lbl { font-family: 'Open Sans Condensed', Helvetica, Arial, sans-serif; }
+
+.toggler-wrapper .toggler-lbl.no { float: left; padding-right: 5px; }
+.toggler-wrapper .toggler-lbl.yes { float: left; padding-left: 5px; }
+
+
+.toggler-wrapper toggler-lbl.none { display: none; }
+
+.toggler-wrapper.large .toggler-lbl,
+.toggler-wrapper.small .toggler-lbl
+{ line-height:  1.5em; }

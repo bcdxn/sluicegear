@@ -2,11 +2,11 @@ var Dispatcher   = require('../dispatcher'),
     assign       = require('object-assign'),
     EventEmitter = require('events').EventEmitter,
     _colors      = [],
-    ColorStore;
+    PickListStore;
 
-_colors = ['red', 'blue', 'tan', 'burgundy', 'turquoise', 'black'];
+_colors = ['Red', 'Blue', 'Tan', 'Burgundy', 'Turquoise', 'Black'];
 
-ColorStore = assign({}, EventEmitter.prototype, {
+PickListStore = assign({}, EventEmitter.prototype, {
   emitChange: function () {
     this.emit('change');
   },
@@ -19,12 +19,12 @@ ColorStore = assign({}, EventEmitter.prototype, {
     this.removeListener('change', callback);
   },
 
-  getAll: function () {
+  getAllColors: function () {
     return _colors;
   }
 });
     
-ColorStore.dispatchToken = Dispatcher.register(function(action) {
+PickListStore.dispatchToken = Dispatcher.register(function(action) {
   switch(action.type) {
     default:
       // no-op
@@ -32,4 +32,4 @@ ColorStore.dispatchToken = Dispatcher.register(function(action) {
   }
 });
 
-module.exports = ColorStore;
+module.exports = PickListStore;

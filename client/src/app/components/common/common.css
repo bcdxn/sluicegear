@@ -119,3 +119,11 @@
 .pls { padding-left: 5px; }
 .plm { padding-left: 10px; }
 .pll { padding-left: 20px; }
+
+/* Common Margins and Paddings
+------------------------------------------------------------------------------*/
+.info {
+  background: rgba(217,237,247,.2);
+  border-color: #bce8f1;
+  color: #245269;
+}

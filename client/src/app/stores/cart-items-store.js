@@ -25,7 +25,6 @@ function _addCartItem(item) {
  * @param {String} id The id of the cart item to remove
  */
 function _removeCartItem(id) {
-  console.log('called _removeCartItem(' + id + ')')
   _cartItems = _cartItems.filter(function (item) {
     return item.id !== id;
   });
