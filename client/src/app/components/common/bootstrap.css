@@ -5,8 +5,8 @@
  */
 
 /*!
- * Generated using the Bootstrap Customizer (http://getbootstrap.com/customize/?id=82b52f005cae6b9a82f4)
- * Config saved to config.json and https://gist.github.com/82b52f005cae6b9a82f4
+ * Generated using the Bootstrap Customizer (http://getbootstrap.com/customize/?id=1091c54f53ec67ea3dbe)
+ * Config saved to config.json and https://gist.github.com/1091c54f53ec67ea3dbe
  */
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
@@ -302,12 +302,12 @@ hr {
 }
 @media (min-width: 768px) {
   .container {
-    width: 750px;
+    width: 510px;
   }
 }
 @media (min-width: 992px) {
   .container {
-    width: 970px;
+    width: 780px;
   }
 }
 @media (min-width: 1200px) {

@@ -81,7 +81,6 @@ CustomizerStore = assign({}, EventEmitter.prototype, {
 });
     
 CustomizerStore.dispatchToken = Dispatcher.register(function(action) {
-  console.log('action: ' + action.type);
   switch(action.type) {
     case CustomizerConstants.ActionTypes.SET_MODEL:
       _setHammockModel(action.model);

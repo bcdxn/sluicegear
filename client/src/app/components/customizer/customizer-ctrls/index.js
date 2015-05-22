@@ -1,14 +1,16 @@
 var classNames          = require('classnames'),
     CustomizerConstants = require('../../../constants/customizer'),
     CustomizerActions   = require('../../../actions/customizer'),
+    ProductStore        = require('../../../stores/product'),
     Toggler             = require('../../common/toggler'),
+    Utils               = require('../../../utils'),
     CustomizerCtrls;
 
 CustomizerCtrls = React.createClass({
   getDefaultProps: function () {
     return {
-      'singleDescription': 'Get the comfort you deserve. Single color hammock: 9.5ft long, 4.5ft wide. ',
-      'doubleDescription': 'The Double makes sharing easy. Double color hammock: 9.5ft long, 7.5ft wide. ',
+      'singleDescription': 'Get the comfort you deserve. Single color hammock: 9.5ft long, 4.5ft wide.',
+      'doubleDescription': 'The Double makes sharing easy. Double color hammock: 9.5ft long, 7.5ft wide.',
       'hammieDescription': 'Because kids like hammocks, too! Single color hammock for kids: 6ft long, 4.5ft wide'
     };
   },
@@ -29,20 +31,20 @@ CustomizerCtrls = React.createClass({
     }
   },
   getBuildPrice: function () {
-    var price = 0;
-    
-    if (this.props.model === CustomizerConstants.Models.SINGLE) {
-      price = CustomizerConstants.Prices.SINGLE_COST;
-    } else if (this.props.model === CustomizerConstants.Models.DOUBLE) {
-      price = CustomizerConstants.Prices.DOUBLE_COST;
-    } else if (this.props.model === CustomizerConstants.Models.HAMMIE) {
-      price = CustomizerConstants.Prices.HAMMIE_COST;
-    } else {
-      throw 'Unsupported model type';
-    }
-    
-    if (this.props.includeStraps) {
-      price += CustomizerConstants.Prices.STRAPS_COST;
+    var hammock = ProductStore.getProductByHash(Utils.getHammockHash({
+          'model': this.props.model,
+          'primaryColor': this.props.primaryColor,
+          'secondaryColor': this.props.secondaryColor
+        })),
+        straps =ProductStore.getProductByHash(Utils.getStrapsHash()),
+        price = 0;
+        
+   if (hammock) {
+     price = hammock.price;
+   }
+        
+    if (this.props.includeStraps && straps) {
+      price += straps.price;
     }
     
     return price;

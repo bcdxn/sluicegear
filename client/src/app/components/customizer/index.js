@@ -14,13 +14,11 @@ Customizer = React.createClass({
     };
   },
   componentDidMount: function () {
-    window.addEventListener('resize', this.handleResize);
     CustomizerStore.addChangeListener(this._onCustomBuildChange); // Customized build has changed
     ProductStore.addChangeListener(this._onProductsChange); // Initial load of products is complete
   },
 
   componentWillUnmount: function () {
-    window.removeEventListener('resize', this.handleResize);
     CustomizerStore.removeChangeListener(this._onCustomBuildChange);
     ProductStore.removeChangeListener(this._onProductsChange);
   },
@@ -42,7 +40,7 @@ Customizer = React.createClass({
     return (
       <div className='hammock-builder container-fluid'>
         <div className='row'>
-          <div className='col-md-7 col-sm-12 ptl'>
+          <div className='col-sm-7 ptl'>
             <CustomizerPreviewer
               model={this.state.model}
               primaryColor={this.state.primaryColor}
@@ -50,7 +48,7 @@ Customizer = React.createClass({
               includeStraps={this.state.includeStraps}
               products={this.state.products} />
           </div>
-          <div className='col-md-5 col-sm-12 ptl'>
+          <div className='col-sm-5 ptl'>
             <CustomizerCtrls
               model={this.state.model}
               primaryColor={this.state.primaryColor}
