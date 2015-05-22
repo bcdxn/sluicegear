@@ -31,13 +31,19 @@ var CustomizerPreviewer = React.createClass({
                           : '') + '.jpg').toLowerCase(),
         strapsImgSrc  = '/img/products/SIN-R.jpg',
         mainImgBgStyle = {
-          'backgroundImage': 'url(' + hammockImgSrc + ')'
+          'backgroundImage': ((currentSku)
+                              ? 'url(' + hammockImgSrc + ')'
+                              : 'none')
         },
         thumb1Style = {
-          'backgroundImage': 'url(' + hammockImgSrc + ')'
+          'backgroundImage': ((currentSku)
+                              ? 'url(' + hammockImgSrc + ')'
+                              : 'none')
         },
         thumb2Style = {
-          'backgroundImage': 'url(' + bagImgSrc + ')'
+          'backgroundImage': ((currentSku)
+                              ? 'url(' + bagImgSrc + ')'
+                              : 'none')
         },
         thumb3Style = {
           'backgroundImage': 'url(/img/products/STRAP.jpg)',

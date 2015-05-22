@@ -2,18 +2,23 @@ var Dispatcher   = require('../dispatcher'),
     assign       = require('object-assign'),
     EventEmitter = require('events').EventEmitter,
     _products    = [],
-    ProductsStore;
+    ProductStore;
 
-_products = [{ 'sku': 'SIN-R', 'hash': 'a783d1a8e90c7bcf9a26655980fb7d44'}
-            ,{ 'sku': 'SIN-L', 'hash': 'f38a1abb4217c2ce2eb60ad8c3cd30b5'}];
-
-ProductsStore = assign({}, EventEmitter.prototype, {
+ProductStore = assign({}, EventEmitter.prototype, {
   emitChange: function () {
     this.emit('change');
   },
 
   addChangeListener: function (callback) {
     this.on('change', callback);
+  },
+  
+  initialLoad: function () {
+    var self = this;
+    $.get('/api/Product', function (result) {
+      _products = result;
+      self.emitChange();
+    });
   },
 
   removeChangeListener: function (callback) {
@@ -37,7 +42,7 @@ ProductsStore = assign({}, EventEmitter.prototype, {
   }
 });
     
-ProductsStore.dispatchToken = Dispatcher.register(function(action) {
+ProductStore.dispatchToken = Dispatcher.register(function(action) {
   switch(action.type) {
     default:
       // no-op
@@ -45,4 +50,6 @@ ProductsStore.dispatchToken = Dispatcher.register(function(action) {
   }
 });
 
-module.exports = ProductsStore;
+ProductStore.initialLoad();
+
+module.exports = ProductStore;

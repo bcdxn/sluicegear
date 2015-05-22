@@ -3,7 +3,7 @@ var Dispatcher     = require('../dispatcher'),
     assign         = require('object-assign'),
     EventEmitter   = require('events').EventEmitter,
     _cartItems     = [],
-    _isCartVisible = true,
+    _isCartVisible = false,
     CartStore;
     
 // TEMP

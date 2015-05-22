@@ -8,7 +8,7 @@ var Dispatcher   = require('../dispatcher'),
       secondaryColor: CustomizerConstants.Colors.BLUE,
       includeStraps:  true
     },
-    BuilderStore;
+    CustomizerStore;
 
 function _setHammockModel(hammockModel) {
   _customBuild.model = hammockModel;
@@ -46,7 +46,7 @@ function _setSecondaryColor(color) {
   }
 }
 
-BuilderStore = assign({}, EventEmitter.prototype, {
+CustomizerStore = assign({}, EventEmitter.prototype, {
   emitChange: function () {
     this.emit('change');
   },
@@ -80,24 +80,24 @@ BuilderStore = assign({}, EventEmitter.prototype, {
   }
 });
     
-BuilderStore.dispatchToken = Dispatcher.register(function(action) {
+CustomizerStore.dispatchToken = Dispatcher.register(function(action) {
   console.log('action: ' + action.type);
   switch(action.type) {
     case CustomizerConstants.ActionTypes.SET_MODEL:
       _setHammockModel(action.model);
-      BuilderStore.emitChange();
+      CustomizerStore.emitChange();
       break;
     case CustomizerConstants.ActionTypes.SET_PRIMARY_COLOR:
       _setPrimaryColor(action.primaryColor);
-      BuilderStore.emitChange();
+      CustomizerStore.emitChange();
       break;
     case CustomizerConstants.ActionTypes.SET_SECONDARY_COLOR:
       _setSecondaryColor(action.secondaryColor);
-      BuilderStore.emitChange();
+      CustomizerStore.emitChange();
       break;
     case CustomizerConstants.ActionTypes.SET_INCLUDE_STRAPS:
       _customBuild.includeStraps = action.includeStraps;
-      BuilderStore.emitChange();
+      CustomizerStore.emitChange();
       break;
     default:
       // no-op
@@ -105,4 +105,4 @@ BuilderStore.dispatchToken = Dispatcher.register(function(action) {
   }
 });
 
-module.exports = BuilderStore
+module.exports = CustomizerStore;

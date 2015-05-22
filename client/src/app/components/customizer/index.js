@@ -1,6 +1,7 @@
 var CustomizerCtrls     = require('./customizer-ctrls'),
     CustomizerPreviewer = require('./customizer-previewer'),
     CustomizerStore     = require('../../stores/customizer'),
+    ProductStore       = require('../../stores/product'),
     Customizer;
 
 Customizer = React.createClass({
@@ -14,12 +15,14 @@ Customizer = React.createClass({
   },
   componentDidMount: function () {
     window.addEventListener('resize', this.handleResize);
-    CustomizerStore.addChangeListener(this._onCustomBuildChange);
+    CustomizerStore.addChangeListener(this._onCustomBuildChange); // Customized build has changed
+    ProductStore.addChangeListener(this._onProductsChange); // Initial load of products is complete
   },
 
   componentWillUnmount: function () {
     window.removeEventListener('resize', this.handleResize);
     CustomizerStore.removeChangeListener(this._onCustomBuildChange);
+    ProductStore.removeChangeListener(this._onProductsChange);
   },
   
   _onCustomBuildChange: function () {
@@ -31,6 +34,10 @@ Customizer = React.createClass({
     });
   },
   
+  _onProductsChange: function () {
+    this.setState(); // Force re-render so product images will be loaded
+  },
+  
   render: function () {
     return (
       <div className='hammock-builder container-fluid'>
@@ -40,7 +47,8 @@ Customizer = React.createClass({
               model={this.state.model}
               primaryColor={this.state.primaryColor}
               secondaryColor={this.state.secondaryColor}
-              includeStraps={this.state.includeStraps} />
+              includeStraps={this.state.includeStraps}
+              products={this.state.products} />
           </div>
           <div className='col-md-5 col-sm-12 ptl'>
             <CustomizerCtrls
