@@ -73,6 +73,10 @@ BuilderStore = assign({}, EventEmitter.prototype, {
   
   getIncludeStraps: function () {
     return _customBuild.includeStraps;
+  },
+  
+  getCustomBuild: function () {
+    return _customBuild;
   }
 });
     

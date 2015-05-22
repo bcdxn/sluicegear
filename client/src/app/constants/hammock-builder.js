@@ -31,5 +31,11 @@ module.exports = {
     DOUBLE_COST: 8495,
     HAMMIE_COST: 4995,
     STRAPS_COST: 1995
-  }
+  },
+  
+  Previews: keyMirror({
+    MAIN_HAMMOCK: null,
+    HAMMOCK_BAG:  null,
+    STRAPS:       null
+  })
 };

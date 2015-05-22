@@ -1,0 +1,46 @@
+.builder-preview {
+  font-family: 'Open Sans Condensed', Helvetica, Arial, sans-serif;
+}
+
+.builder-preview-title {
+  font-size: 18px;
+}
+
+.builder-preview-main {
+  border-bottom: 1px solid #ccc;
+  height: 370px;
+}
+
+.builder-preview-main-img {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  height: 100%;
+  width: 100%;
+}
+
+.builder-preview-thumbnail {
+  height: 75px;
+}
+
+.builder-preview-thumbnail-img {
+  background-position: center center;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  cursor: pointer;
+  height: 100%;
+  padding: 10px;
+  width: 100%;
+}
+
+.builder-preview-thumbnail-img:hover {
+  box-shadow: 0px 0px 8px rgba(0,0,0,0.4)
+}
+
+.builder-preview-thumbnail-img.wide-thumb {
+  background-size: 100% auto;
+}
+
+.builder-preview-thumbnail-img.tall-thumb {
+  background-size: auto 100%;
+}

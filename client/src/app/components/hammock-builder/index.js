@@ -1,4 +1,5 @@
 var HammockBuilderCtrls = require('../hammock-builder-ctrls'),
+    HammockBuilderPreview = require('../hammock-builder-preview'),
     BuilderStore  = require('../../stores/builder-store');
 
 var HammockBuilder = React.createClass({
@@ -33,8 +34,14 @@ var HammockBuilder = React.createClass({
     return (
       <div className='hammock-builder container-fluid'>
         <div className='row'>
-          <div className='col-md-8 col-sm-12 ptl'></div>
-          <div className='col-md-4 col-sm-12 ptl'>
+          <div className='col-md-7 col-sm-12 ptl'>
+            <HammockBuilderPreview
+              model={this.state.model}
+              primaryColor={this.state.primaryColor}
+              secondaryColor={this.state.secondaryColor}
+              includeStraps={this.state.includeStraps} />
+          </div>
+          <div className='col-md-5 col-sm-12 ptl'>
             <HammockBuilderCtrls
               model={this.state.model}
               primaryColor={this.state.primaryColor}
