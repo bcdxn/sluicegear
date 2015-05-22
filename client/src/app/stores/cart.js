@@ -1,9 +1,10 @@
-var Dispatcher           = require('../dispatcher'),
-    CartItemsActionTypes = require('../constants/cart-items-constants').ActionTypes,
-    assign               = require('object-assign'),
-    EventEmitter         = require('events').EventEmitter,
-    _cartItems           = [],
-    CartItemsStore;
+var Dispatcher     = require('../dispatcher'),
+    CartConstants  = require('../constants/cart'),
+    assign         = require('object-assign'),
+    EventEmitter   = require('events').EventEmitter,
+    _cartItems     = [],
+    _isCartVisible = true,
+    CartStore;
     
 // TEMP
 _addCartItem({'sku': 'SIN-R', 'description': 'Single-wide red hammock', 'price': 5995 });
@@ -30,7 +31,21 @@ function _removeCartItem(id) {
   });
 }
 
-CartItemsStore = assign({}, EventEmitter.prototype, {
+/**
+ * Show the shopping cart.
+ */
+function _showCart() {
+  _isCartVisible = true;
+}
+
+/**
+ * Hide the shopping cart
+ */
+function _hideCart(id) {
+  _isCartVisible = false;
+}
+
+CartStore = assign({}, EventEmitter.prototype, {
   emitChange: function() {
     this.emit('change');
   },
@@ -43,29 +58,43 @@ CartItemsStore = assign({}, EventEmitter.prototype, {
     this.removeListener('change', callback);
   },
 
-  get: function(id) {
+  getItem: function(id) {
     return _cartItems[id];
   },
 
-  getAll: function() {
+  getAllItems: function() {
     return _cartItems;
+  },
+
+  getIsCartVisible: function () {
+    return _isCartVisible;
   }
 });
 
-CartItemsStore.dispatchToken = Dispatcher.register(function(action) {
+CartStore.dispatchToken = Dispatcher.register(function(action) {
   switch(action.type) {
-    case CartItemsActionTypes.ADD_ITEM:
+    case CartConstants.ActionTypes.ADD_ITEM:
       _addCartItem({
         'sku':         action.newItem.sku,
         'description': action.newItem.sku,
         'price':       action.newItem.price
       });
-      CartItemsStore.emitChange();
+      CartStore.emitChange();
       break;
     
-    case CartItemsActionTypes.REMOVE_ITEM:
+    case CartConstants.ActionTypes.REMOVE_ITEM:
       _removeCartItem(action.itemId);
-      CartItemsStore.emitChange();
+      CartStore.emitChange();
+      break
+    
+    case CartConstants.ActionTypes.SHOW_CART:
+      _showCart();
+      CartStore.emitChange();
+      break;
+    
+    case CartConstants.ActionTypes.HIDE_CART:
+      _hideCart(action.itemId);
+      CartStore.emitChange();
       break
     
     default:
@@ -74,4 +103,4 @@ CartItemsStore.dispatchToken = Dispatcher.register(function(action) {
   }
 });
 
-module.exports = CartItemsStore;
+module.exports = CartStore;

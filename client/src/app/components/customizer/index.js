@@ -1,32 +1,33 @@
-var HammockBuilderCtrls = require('../hammock-builder-ctrls'),
-    HammockBuilderPreview = require('../hammock-builder-preview'),
-    BuilderStore  = require('../../stores/builder-store');
+var CustomizerCtrls     = require('./customizer-ctrls'),
+    CustomizerPreviewer = require('./customizer-previewer'),
+    CustomizerStore     = require('../../stores/customizer'),
+    Customizer;
 
-var HammockBuilder = React.createClass({
+Customizer = React.createClass({
   getInitialState: function () {
     return {
-      'model':          BuilderStore.getHammockModel(),
-      'primaryColor':   BuilderStore.getPrimaryColor(),
-      'secondaryColor': BuilderStore.getSecondaryColor(),
-      'includeStraps':  BuilderStore.getIncludeStraps()
+      'model':          CustomizerStore.getHammockModel(),
+      'primaryColor':   CustomizerStore.getPrimaryColor(),
+      'secondaryColor': CustomizerStore.getSecondaryColor(),
+      'includeStraps':  CustomizerStore.getIncludeStraps()
     };
   },
   componentDidMount: function () {
     window.addEventListener('resize', this.handleResize);
-    BuilderStore.addChangeListener(this._onCustomBuildChange);
+    CustomizerStore.addChangeListener(this._onCustomBuildChange);
   },
 
   componentWillUnmount: function () {
     window.removeEventListener('resize', this.handleResize);
-    BuilderStore.removeChangeListener(this._onCustomBuildChange);
+    CustomizerStore.removeChangeListener(this._onCustomBuildChange);
   },
   
   _onCustomBuildChange: function () {
     this.setState({
-      'model':          BuilderStore.getHammockModel(),
-      'primaryColor':   BuilderStore.getPrimaryColor(),
-      'secondaryColor': BuilderStore.getSecondaryColor(),
-      'includeStraps':  BuilderStore.getIncludeStraps()
+      'model':          CustomizerStore.getHammockModel(),
+      'primaryColor':   CustomizerStore.getPrimaryColor(),
+      'secondaryColor': CustomizerStore.getSecondaryColor(),
+      'includeStraps':  CustomizerStore.getIncludeStraps()
     });
   },
   
@@ -35,14 +36,14 @@ var HammockBuilder = React.createClass({
       <div className='hammock-builder container-fluid'>
         <div className='row'>
           <div className='col-md-7 col-sm-12 ptl'>
-            <HammockBuilderPreview
+            <CustomizerPreviewer
               model={this.state.model}
               primaryColor={this.state.primaryColor}
               secondaryColor={this.state.secondaryColor}
               includeStraps={this.state.includeStraps} />
           </div>
           <div className='col-md-5 col-sm-12 ptl'>
-            <HammockBuilderCtrls
+            <CustomizerCtrls
               model={this.state.model}
               primaryColor={this.state.primaryColor}
               secondaryColor={this.state.secondaryColor}
@@ -54,4 +55,4 @@ var HammockBuilder = React.createClass({
   }
 });
 
-module.exports = HammockBuilder;
+module.exports = Customizer;

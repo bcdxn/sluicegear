@@ -1,13 +1,13 @@
-var classNames    = require('classnames'),
-    Constants     = require('../../constants/hammock-builder'),
-    BuilderStore  = require('../../stores/builder-store'),
-    ProductsStore = require('../../stores/products-store'),
-    Util          = require('../common/util');
+var classNames          = require('classnames'),
+    CustomizerConstants = require('../../../constants/customizer'),
+    CustomizerStore     = require('../../../stores/customizer'),
+    ProductsStore       = require('../../../stores/product'),
+    Utils               = require('../../../utils');
 
-var BuilderPreview = React.createClass({
+var CustomizerPreviewer = React.createClass({
   getInitialState: function () {
     return {
-      'selectedThumbnail': Constants.Previews.MAIN_HAMMOCK,
+      'selectedThumbnail': CustomizerConstants.PreviewImgTypes.MAIN_HAMMOCK,
     };
   },
   render: function () {
@@ -15,7 +15,7 @@ var BuilderPreview = React.createClass({
           'builder-preview': true,
           'container-fluid': true
         }),
-        currentProduct = ProductsStore.getProductByHash(Util.getBuildHash({
+        currentProduct = ProductsStore.getProductByHash(Utils.getBuildHash({
           'model': this.props.model,
           'primaryColor': this.props.primaryColor,
           'secondaryColor': this.props.secondaryColor,
@@ -25,10 +25,10 @@ var BuilderPreview = React.createClass({
                         ? currentProduct.sku
                         : '',
         hammockImgSrc = '/img/products/' + currentSku + '.jpg',
-        bagImgSrc     = '/img/bags/' + this.props.primaryColor +
+        bagImgSrc     = ('/img/bags/' + this.props.primaryColor +
                         ((this.props.secondaryColor)
                           ? '-' + this.props.secondaryColor
-                          : '') + '.jpg',
+                          : '') + '.jpg').toLowerCase(),
         strapsImgSrc  = '/img/products/SIN-R.jpg',
         mainImgBgStyle = {
           'backgroundImage': 'url(' + hammockImgSrc + ')'
@@ -66,4 +66,4 @@ var BuilderPreview = React.createClass({
   }
 });
 
-module.exports = BuilderPreview;
+module.exports = CustomizerPreviewer;

@@ -1,11 +1,11 @@
 var Dispatcher   = require('../dispatcher'),
     assign       = require('object-assign'),
     EventEmitter = require('events').EventEmitter,
-    Constants    = require('../constants/hammock-builder'),
+    CustomizerConstants    = require('../constants/customizer'),
     _customBuild = {
-      model:          Constants.Models.DOUBLE,
-      primaryColor:   Constants.Colors.RED,
-      secondaryColor: Constants.Colors.BLUE,
+      model:          CustomizerConstants.Models.DOUBLE,
+      primaryColor:   CustomizerConstants.Colors.RED,
+      secondaryColor: CustomizerConstants.Colors.BLUE,
       includeStraps:  true
     },
     BuilderStore;
@@ -13,13 +13,13 @@ var Dispatcher   = require('../dispatcher'),
 function _setHammockModel(hammockModel) {
   _customBuild.model = hammockModel;
   
-  if (hammockModel != Constants.Models.DOUBLE) {
+  if (hammockModel != CustomizerConstants.Models.DOUBLE) {
     _customBuild.secondaryColor = null;
   } else {
-    if (_customBuild.primaryColor === Constants.Colors.RED) {
-      _customBuild.secondaryColor = Constants.Colors.BLUE;
+    if (_customBuild.primaryColor === CustomizerConstants.Colors.RED) {
+      _customBuild.secondaryColor = CustomizerConstants.Colors.BLUE;
     } else {
-      _customBuild.secondaryColor = Constants.Colors.RED;
+      _customBuild.secondaryColor = CustomizerConstants.Colors.RED;
     }
   }
 }
@@ -27,10 +27,10 @@ function _setHammockModel(hammockModel) {
 function _setPrimaryColor(color) {
   _customBuild.primaryColor = color;
   if (_customBuild.primaryColor === _customBuild.secondaryColor) {
-    if (_customBuild.primaryColor === Constants.Colors.RED) {
-      _customBuild.secondaryColor = Constants.Colors.BLUE;
+    if (_customBuild.primaryColor === CustomizerConstants.Colors.RED) {
+      _customBuild.secondaryColor = CustomizerConstants.Colors.BLUE;
     } else {
-      _customBuild.secondaryColor = Constants.Colors.RED;
+      _customBuild.secondaryColor = CustomizerConstants.Colors.RED;
     }
   }
 }
@@ -38,10 +38,10 @@ function _setPrimaryColor(color) {
 function _setSecondaryColor(color) {
   _customBuild.secondaryColor = color;
   if (_customBuild.primaryColor === _customBuild.secondaryColor) {
-    if (_customBuild.secondaryColor === Constants.Colors.RED) {
-      _customBuild.primaryColor = Constants.Colors.BLUE;
+    if (_customBuild.secondaryColor === CustomizerConstants.Colors.RED) {
+      _customBuild.primaryColor = CustomizerConstants.Colors.BLUE;
     } else {
-      _customBuild.primaryColor = Constants.Colors.RED;
+      _customBuild.primaryColor = CustomizerConstants.Colors.RED;
     }
   }
 }
@@ -83,19 +83,19 @@ BuilderStore = assign({}, EventEmitter.prototype, {
 BuilderStore.dispatchToken = Dispatcher.register(function(action) {
   console.log('action: ' + action.type);
   switch(action.type) {
-    case Constants.ActionTypes.SET_MODEL:
+    case CustomizerConstants.ActionTypes.SET_MODEL:
       _setHammockModel(action.model);
       BuilderStore.emitChange();
       break;
-    case Constants.ActionTypes.SET_PRIMARY_COLOR:
+    case CustomizerConstants.ActionTypes.SET_PRIMARY_COLOR:
       _setPrimaryColor(action.primaryColor);
       BuilderStore.emitChange();
       break;
-    case Constants.ActionTypes.SET_SECONDARY_COLOR:
+    case CustomizerConstants.ActionTypes.SET_SECONDARY_COLOR:
       _setSecondaryColor(action.secondaryColor);
       BuilderStore.emitChange();
       break;
-    case Constants.ActionTypes.SET_INCLUDE_STRAPS:
+    case CustomizerConstants.ActionTypes.SET_INCLUDE_STRAPS:
       _customBuild.includeStraps = action.includeStraps;
       BuilderStore.emitChange();
       break;

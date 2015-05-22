@@ -1,8 +1,7 @@
-var CartItemList       = require('../cart-item-list'),
-    classNames         = require('classnames'),
-    CartStore          = require('../../stores/cart-store'),
-    CartItemsStore     = require('../../stores/cart-items-store'),
-    CartActionCreators = require('../../actions/cart-action-creators.js');
+var CartItemList = require('./cart-item-list'),
+    classNames   = require('classnames'),
+    CartStore    = require('../../stores/cart'),
+    CartActions  = require('../../actions/cart');
 
 var Cart = React.createClass({
   getDefaultProps: function () {
@@ -16,18 +15,18 @@ var Cart = React.createClass({
   getInitialState: function () {
     return {
       // Display logic attributes
-      'isCartVisible': CartStore.isCartVisible(),
+      'isCartVisible': CartStore.getIsCartVisible(),
       'cartHeight': window.innerHeight,
       // Business logic attributes
       'salesTax':   0,
       'adjustment': 0,
-      'items':      CartItemsStore.getAll(),
+      'items':      CartStore.getAllItems(),
       'coupon':     {}
     };
   },
   
   hideCart: function () {
-    CartActionCreators.hideCart();
+    CartActions.hideCart();
   },
 
   handleResize: function (e) {
@@ -36,23 +35,16 @@ var Cart = React.createClass({
 
   componentDidMount: function () {
     window.addEventListener('resize', this.handleResize);
-    CartItemsStore.addChangeListener(this._onCartItemsChange);
-    CartStore.addChangeListener(this._onCartVisibilityChange);
+    CartStore.addChangeListener(this._onCartChange);
   },
 
   componentWillUnmount: function () {
     window.removeEventListener('resize', this.handleResize);
-    CartItemsStore.removeChangeListener(this._onCartItemsChange);
-    CartStore.removeChangeListener(this._onCartVisibilityChange);
+    CartStore.removeChangeListener(this._onCartItemsChange);
   },
   
   _onCartItemsChange: function () {
-    this.setState({ 'items': CartItemsStore.getAll() });
-  },
-  
-  _onCartVisibilityChange: function () {
-    console.log('visibilty change ' + CartStore.isCartVisible())
-    this.setState({ 'isCartVisible': CartStore.isCartVisible() });
+    this.setState({ 'items': CartStore.getAllItems(), 'isCartVisible': CartStore.getIsCartVisible() });
   },
 
   render: function () {

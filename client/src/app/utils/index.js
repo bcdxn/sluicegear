@@ -1,6 +1,6 @@
 var MD5 = require('MD5');
 
-var Util = {
+var Utils = {
   /**
    * Generate the md5 hash of the hammock properties
    * so that we can quickly map a build to a sku.
@@ -21,4 +21,4 @@ var Util = {
 };
 
 
-module.exports = Util;
+module.exports = Utils;

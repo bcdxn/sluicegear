@@ -1,6 +1,7 @@
-var CartItem = require('../cart-item');
+var CartItem = require('../cart-item'),
+    CartItemList;
 
-var CartItemList = React.createClass({
+CartItemList = React.createClass({
   render: function () {
     var itemNodes =  this.props.items.map(function (item) {
       return (

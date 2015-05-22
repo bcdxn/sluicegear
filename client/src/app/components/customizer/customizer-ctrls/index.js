@@ -1,10 +1,10 @@
-var classNames            = require('classnames'),
-    Constants             = require('../../constants/hammock-builder'),
-    BuilderActionCreators = require('../../actions/builder-action-creators'),
-    BuilderStore          = require('../../stores/builder-store'),
-    Toggler               = require('../toggler');
+var classNames          = require('classnames'),
+    CustomizerConstants = require('../../../constants/customizer'),
+    CustomizerActions   = require('../../../actions/customizer'),
+    Toggler             = require('../../common/toggler'),
+    CustomizerCtrls;
 
-var HammockBuilderCtrls = React.createClass({
+CustomizerCtrls = React.createClass({
   getDefaultProps: function () {
     return {
       'singleDescription': 'Get the comfort you deserve. Single color hammock: 9.5ft long, 4.5ft wide. ',
@@ -13,36 +13,36 @@ var HammockBuilderCtrls = React.createClass({
     };
   },
   setHammockModel: function (model) {
-    BuilderActionCreators.setHammockModel(model);
+    CustomizerActions.setHammockModel(model);
   },
   setPrimaryColor: function (color) {
-    BuilderActionCreators.setPrimaryColor(color);
+    CustomizerActions.setPrimaryColor(color);
   },
   setSecondaryColor: function (color) {
-    BuilderActionCreators.setSecondaryColor(color);
+    CustomizerActions.setSecondaryColor(color);
   },
   toggleStraps: function () {
-    if (BuilderStore.getIncludeStraps()) {
-      BuilderActionCreators.setIncludeStraps(false);
+    if (this.props.includeStraps) {
+      CustomizerActions.setIncludeStraps(false);
     } else {
-      BuilderActionCreators.setIncludeStraps(true);
+      CustomizerActions.setIncludeStraps(true);
     }
   },
   getBuildPrice: function () {
     var price = 0;
     
-    if (this.props.model === Constants.Models.SINGLE) {
-      price = Constants.Prices.SINGLE_COST;
-    } else if (this.props.model === Constants.Models.DOUBLE) {
-      price = Constants.Prices.DOUBLE_COST;
-    } else if (this.props.model === Constants.Models.HAMMIE) {
-      price = Constants.Prices.HAMMIE_COST;
+    if (this.props.model === CustomizerConstants.Models.SINGLE) {
+      price = CustomizerConstants.Prices.SINGLE_COST;
+    } else if (this.props.model === CustomizerConstants.Models.DOUBLE) {
+      price = CustomizerConstants.Prices.DOUBLE_COST;
+    } else if (this.props.model === CustomizerConstants.Models.HAMMIE) {
+      price = CustomizerConstants.Prices.HAMMIE_COST;
     } else {
       throw 'Unsupported model type';
     }
     
     if (this.props.includeStraps) {
-      price += Constants.Prices.STRAPS_COST;
+      price += CustomizerConstants.Prices.STRAPS_COST;
     }
     
     return price;
@@ -51,9 +51,9 @@ var HammockBuilderCtrls = React.createClass({
     var classes = classNames({
       'hammock-builder-ctrls':  true,
       'container-fluid': true,
-      'single-selected': this.props.model === Constants.Models.SINGLE,
-      'double-selected': this.props.model === Constants.Models.DOUBLE,
-      'hammie-selected': this.props.model === Constants.Models.HAMMIE
+      'single-selected': this.props.model === CustomizerConstants.Models.SINGLE,
+      'double-selected': this.props.model === CustomizerConstants.Models.DOUBLE,
+      'hammie-selected': this.props.model === CustomizerConstants.Models.HAMMIE
     }),
     secondaryColor = (this.props.secondaryColor)
                         ? this.props.secondaryColor.toLowerCase()
@@ -66,23 +66,23 @@ var HammockBuilderCtrls = React.createClass({
         </div>
         <div className='row btn-grp ptm'>
           <button className='btn gray left-btn shadow builder-ctrls-model-btn model-single-btn'
-              onClick={this.setHammockModel.bind(this, Constants.Models.SINGLE)}>
-            {Constants.Models.SINGLE}
+              onClick={this.setHammockModel.bind(this, CustomizerConstants.Models.SINGLE)}>
+            {CustomizerConstants.Models.SINGLE}
           </button>
           <button className='btn gray middle-btn shadow builder-ctrls-model-btn model-double-btn'
-              onClick={this.setHammockModel.bind(this, Constants.Models.DOUBLE)}>
-            {Constants.Models.DOUBLE}
+              onClick={this.setHammockModel.bind(this, CustomizerConstants.Models.DOUBLE)}>
+            {CustomizerConstants.Models.DOUBLE}
           </button>
           <button className='btn gray right-btn shadow builder-ctrls-model-btn model-hammie-btn'
-              onClick={this.setHammockModel.bind(this, Constants.Models.HAMMIE)}>
-            {Constants.Models.HAMMIE}
+              onClick={this.setHammockModel.bind(this, CustomizerConstants.Models.HAMMIE)}>
+            {CustomizerConstants.Models.HAMMIE}
           </button>
         </div>
         <div className='row ptl'>
           <div className='info builder-ctrls-msg-box pam'>
-            {(this.props.model === Constants.Models.SINGLE)
+            {(this.props.model === CustomizerConstants.Models.SINGLE)
               ? this.props.singleDescription
-              : (this.props.model === Constants.Models.DOUBLE)
+              : (this.props.model === CustomizerConstants.Models.DOUBLE)
                 ? this.props.doubleDescription
                 : this.props.hammieDescription}
           </div>
@@ -94,48 +94,48 @@ var HammockBuilderCtrls = React.createClass({
         
         <div className={'row ptm pbl primary-color-choices ' + this.props.primaryColor.toLowerCase()}>
           <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
-            <div className='red-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(null, Constants.Colors.RED)}></div>
+            <div className='red-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(null, CustomizerConstants.Colors.RED)}></div>
           </div>
           <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
-            <div className='blue-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(null, Constants.Colors.BLUE)}></div>
+            <div className='blue-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(null, CustomizerConstants.Colors.BLUE)}></div>
           </div>
           <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
-            <div className='tan-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(this, Constants.Colors.TAN)}></div>
+            <div className='tan-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(this, CustomizerConstants.Colors.TAN)}></div>
           </div>
           <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
-            <div className='burgundy-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(this, Constants.Colors.BURGUNDY)}></div>
+            <div className='burgundy-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(this, CustomizerConstants.Colors.BURGUNDY)}></div>
           </div>
           <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
-            <div className='turquoise-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(this, Constants.Colors.TURQUOISE)}></div>
+            <div className='turquoise-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(this, CustomizerConstants.Colors.TURQUOISE)}></div>
           </div>
           <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
-            <div className='black-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(this, Constants.Colors.BLACK)}></div>
+            <div className='black-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(this, CustomizerConstants.Colors.BLACK)}></div>
           </div>
         </div>
         
-        <div className={'row optional-section pbl ' + ((this.props.model !== Constants.Models.DOUBLE) ? ('folded') : '')}>
+        <div className={'row optional-section pbl ' + ((this.props.model !== CustomizerConstants.Models.DOUBLE) ? ('folded') : '')}>
           <div className='plm prm builder-ctrls-lbl'>
             Choose my hammock's accent color
           </div>
           
           <div className={'ptm secondary-color-choices ' + secondaryColor}>
             <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
-              <div className='red-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(null, Constants.Colors.RED)}></div>
+              <div className='red-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(null, CustomizerConstants.Colors.RED)}></div>
             </div>
             <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
-              <div className='blue-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(null, Constants.Colors.BLUE)}></div>
+              <div className='blue-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(null, CustomizerConstants.Colors.BLUE)}></div>
             </div>
             <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
-              <div className='tan-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(null, Constants.Colors.TAN)}></div>
+              <div className='tan-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(null, CustomizerConstants.Colors.TAN)}></div>
             </div>
             <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
-              <div className='burgundy-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(null, Constants.Colors.BURGUNDY)}></div>
+              <div className='burgundy-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(null, CustomizerConstants.Colors.BURGUNDY)}></div>
             </div>
             <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
-              <div className='turquoise-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(null, Constants.Colors.TURQUOISE)}></div>
+              <div className='turquoise-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(null, CustomizerConstants.Colors.TURQUOISE)}></div>
             </div>
             <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
-              <div className='black-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(null, Constants.Colors.BLACK)}></div>
+              <div className='black-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(null, CustomizerConstants.Colors.BLACK)}></div>
             </div>
           </div>
         </div>
@@ -165,4 +165,4 @@ var HammockBuilderCtrls = React.createClass({
   }
 });
 
-module.exports = HammockBuilderCtrls;
+module.exports = CustomizerCtrls;
