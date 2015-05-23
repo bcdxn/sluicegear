@@ -1,3 +1,7 @@
+#customizerContainer {
+  width: 100%;
+}
+
 .hammock-builder {
   font-family: 'Open Sans Codensed', Helvetica, Arial, sans-serif;
   min-height: 400px;

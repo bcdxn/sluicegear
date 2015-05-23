@@ -1,3 +1,34 @@
+/* Custom Fonts
+------------------------------------------------------------------------------*/
+@font-face {
+    font-family: 'bebas_neue_regularregular';
+    src: url('/fonts/bebasneue_regular-webfont.eot');
+    src: url('/fonts/bebasneue_regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/bebasneue_regular-webfont.woff2') format('woff2'),
+         url('/fonts/bebasneue_regular-webfont.woff') format('woff'),
+         url('/fonts/bebasneue_regular-webfont.ttf') format('truetype'),
+         url('/fonts/bebasneue_regular-webfont.svg#bebas_neue_regularregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'bebas_neuebold';
+    src: url('/fonts/bebasneue_bold-webfont.eot');
+    src: url('/fonts/bebasneue_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/bebasneue_bold-webfont.woff2') format('woff2'),
+         url('/fonts/bebasneue_bold-webfont.woff') format('woff'),
+         url('/fonts/bebasneue_bold-webfont.ttf') format('truetype'),
+         url('/fonts/bebasneue_bold-webfont.svg#bebas_neuebold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 /* Common Button Styling
 ------------------------------------------------------------------------------*/
 .btn {
@@ -42,6 +73,10 @@
   background: none;
   border: 2px solid #007aff;
   color: #007aff;
+}
+.btn.blue.hover:hover {
+  background: #007aff;
+  color: #fff;
 }
 .btn.blue.solid {
   background: #007aff;
@@ -127,3 +162,25 @@
   border-color: #bce8f1;
   color: #245269;
 }
+
+/* Page Banners
+------------------------------------------------------------------------------*/
+.page-banner {
+  border-bottom: 1px solid #ccc;
+  height: 200px;
+  width: 100%;
+}
+
+.page-banner h1 {
+  color: #333;
+  font-family: 'bebas_neuebold', Helvetica, Arial, sans-serif;
+  font-size: 60px;
+  font-weight: bold;
+  text-shadow: 0px 1px 3px rgba(0,0,0,0.5);
+  line-height: 200px;
+  padding: 0 10px 0 10px;
+  text-align: center;
+}
+
+.swirls-bg { background-image: url('/img/textsures/swirl_pattern.png'); }
+.feathered-bg { background-image: url('/img/textures/feathered_pattern.png'); }

@@ -1,0 +1,33 @@
+#productListContainer {
+  border-top: 1px solid #ccc;
+  padding-top: 40px;
+  width: 100%;
+}
+
+.product-list-title {
+  font-family: 'Open Sans Condensed', Helvetica, Arial;
+  font-size: 32px;
+  margin: auto;
+  max-width: 1024px;
+  width: 100%;
+}
+
+.product-list-wrapper {
+  width: 100%;
+}
+
+.product-list {
+  box-sizing: border-box;
+  margin: auto;
+  max-width: 1024px;
+  padding: 10px;
+  width: 100%;
+}
+
+.product-list:after {
+  content: "."; 
+  visibility: hidden; 
+  display: block; 
+  height: 0; 
+  clear: both;
+}

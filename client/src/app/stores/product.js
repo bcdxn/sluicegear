@@ -29,6 +29,20 @@ ProductStore = assign({}, EventEmitter.prototype, {
     return _products;
   },
   
+  getAllExtras: function () {
+    return _products.filter(function (product) {
+      var notHammock = true;
+      
+      product.ProductAttributes.forEach(function (productAttr) {
+        if (productAttr.key === 'type' && productAttr.value === 'hammock') {
+          notHammock = false;
+        }
+      });
+      
+      return notHammock;
+    });
+  },
+  
   getProductByHash: function (hash) {
     var foundProduct = _products.filter(function (product) {
       return product.hash === hash;

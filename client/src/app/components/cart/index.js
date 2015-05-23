@@ -40,7 +40,7 @@ var Cart = React.createClass({
 
   componentWillUnmount: function () {
     window.removeEventListener('resize', this.handleResize);
-    CartStore.removeChangeListener(this._onCartItemsChange);
+    CartStore.removeChangeListener(this._onCartChange);
   },
   
   _onCartItemsChange: function () {
