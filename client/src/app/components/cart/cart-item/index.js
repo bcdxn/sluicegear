@@ -7,7 +7,8 @@ CartItem = React.createClass({
   },
   
   render: function () {
-    var imageSource = '/img/products/' + this.props.item.sku + '.jpg';
+    var imageSource = '/img/products/' + this.props.item.sku + '.jpg',
+        self =  this;
     
     return (
       <div className='cart-item'>

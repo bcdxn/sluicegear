@@ -184,3 +184,11 @@
 
 .swirls-bg { background-image: url('/img/textsures/swirl_pattern.png'); }
 .feathered-bg { background-image: url('/img/textures/feathered_pattern.png'); }
+
+/* Misc
+------------------------------------------------------------------------------*/
+.freeze-page-size {
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}

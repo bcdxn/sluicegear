@@ -27,6 +27,8 @@ var Cart = React.createClass({
   
   hideCart: function () {
     CartActions.hideCart();
+    $('html').removeClass('freeze-page-size');
+    $('body').removeClass('freeze-page-size');
   },
 
   handleResize: function (e) {
@@ -43,7 +45,7 @@ var Cart = React.createClass({
     CartStore.removeChangeListener(this._onCartChange);
   },
   
-  _onCartItemsChange: function () {
+  _onCartChange: function () {
     this.setState({ 'items': CartStore.getAllItems(), 'isCartVisible': CartStore.getIsCartVisible() });
   },
 
@@ -74,37 +76,39 @@ var Cart = React.createClass({
         }
 
     return (
-      <div className={cartClasses} style={cartStyle}>
-        <div className='shopping-cart-global-ctrls'>
-          <div className='btn-grp'>
-            <button className='btn blue solid left-btn shadow cart-close-btn' onClick={this.hideCart.bind(null)}>Keep Shopping</button>
-            <button className={checkoutBtnClasses}>Checkout</button>
+      <div className={'shopping-cart-wrapper ' + ((this.state.isCartVisible) ? 'show-shopping-cart' : '')} onClick={this.hideCart.bind(null)}>
+        <div className={cartClasses} style={cartStyle}>
+          <div className='shopping-cart-global-ctrls'>
+            <div className='btn-grp'>
+              <button className='btn blue solid left-btn shadow cart-close-btn' onClick={this.hideCart.bind(null)}>Keep Shopping</button>
+              <button className={checkoutBtnClasses}>Checkout</button>
+            </div>
           </div>
+          <div className='empty-cart-msg ptl'>{this.props.emptyCartMsg}</div>
+          <div className='cart-summary ptl prm pbl plm'>
+            <ul>
+              <li className='cart-summary-line-item'>
+                <span className='cart-summary-lbl'>{this.state.items.length} {itemsLbl}</span>
+                <span className='cart-summary-val'>${(itemsTotalPrice / 100).toFixed(2)}</span>
+              </li>
+              <li className='cart-summary-line-item ptl'>
+                <span className='cart-summary-lbl'>Shipping</span>
+                <span className='cart-summary-val'>${(shipping / 100).toFixed(2)}</span>
+              </li>
+              <li className='shopping-cart-separator ptl pbl'><div className='inner'></div></li>
+              <li className='cart-summary-line-item'>
+                <span className='cart-summary-lbl'>Total</span>
+                <span className='cart-summary-val'>
+                  ${((itemsTotalPrice + shipping + this.state.adjustment) / 100).toFixed(2)}
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div className='shipping-msg mtl mbl'>
+            FREE SHIPPING ON ORDERS OVER ${(this.props.freeShippingMin / 100).toFixed(2)}
+          </div>
+          <CartItemList items={this.state.items} />
         </div>
-        <div className='empty-cart-msg ptl'>{this.props.emptyCartMsg}</div>
-        <div className='cart-summary ptl prm pbl plm'>
-          <ul>
-            <li className='cart-summary-line-item'>
-              <span className='cart-summary-lbl'>{this.state.items.length} {itemsLbl}</span>
-              <span className='cart-summary-val'>${(itemsTotalPrice / 100).toFixed(2)}</span>
-            </li>
-            <li className='cart-summary-line-item ptl'>
-              <span className='cart-summary-lbl'>Shipping</span>
-              <span className='cart-summary-val'>${(shipping / 100).toFixed(2)}</span>
-            </li>
-            <li className='shopping-cart-separator ptl pbl'><div className='inner'></div></li>
-            <li className='cart-summary-line-item'>
-              <span className='cart-summary-lbl'>Total</span>
-              <span className='cart-summary-val'>
-                ${((itemsTotalPrice + shipping + this.state.adjustment) / 100).toFixed(2)}
-              </span>
-            </li>
-          </ul>
-        </div>
-        <div className='shipping-msg mtl mbl'>
-          FREE SHIPPING ON ORDERS OVER ${(this.props.freeShippingMin / 100).toFixed(2)}
-        </div>
-        <CartItemList items={this.state.items} />
       </div>
     )
   }

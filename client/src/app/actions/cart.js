@@ -4,23 +4,24 @@ var Dispatcher    = require('../dispatcher'),
 var CartActions = {
   showCart: function () {
     Dispatcher.dispatch({
-      type: CartConstants.SHOW_CART
+      type: CartConstants.ActionTypes.SHOW_CART
     });
   },
   hideCart: function () {
     Dispatcher.dispatch({
-      type: CartConstants.HIDE_CART
+      type: CartConstants.ActionTypes.HIDE_CART
     });
   },
   addItem: function (item) {
     Dispatcher.dispatch({
-      type: CartConstants.ADD_ITEM,
+      type: CartConstants.ActionTypes.ADD_ITEM,
       newItem: item
     });
   },
   removeItem: function (itemId) {
+    console.log('id: ' + itemId)
     Dispatcher.dispatch({
-      type: CartConstants.REMOVE_ITEM,
+      type: CartConstants.ActionTypes.REMOVE_ITEM,
       itemId: itemId
     });
   }

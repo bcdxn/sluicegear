@@ -64,7 +64,7 @@
           user-select: none;
 }
 
-.header-menu-item:hover { background: rgba(238, 238, 238, 0.3); text-decoration: none; }
+.header-menu-item:hover { background: rgba(238, 238, 238, 0.4); text-decoration: none; }
 
 .header-menu-item.visited { color: #333; }
 
@@ -83,7 +83,7 @@
           user-select: none;
 }
 
-.header-cart-item:hover { background: rgba(238, 238, 238, 0.3); }
+.header-cart-item:hover { background: rgba(238, 238, 238, 0.4); }
 .header-cart-content {
   margin: auto;
   width: 70px;

@@ -1,6 +1,7 @@
 var classNames          = require('classnames'),
     CustomizerConstants = require('../../../constants/customizer'),
     CustomizerActions   = require('../../../actions/customizer'),
+    CartActions         = require('../../../actions/cart'),
     ProductStore        = require('../../../stores/product'),
     Toggler             = require('../../common/toggler'),
     Utils               = require('../../../utils'),
@@ -49,6 +50,21 @@ CustomizerCtrls = React.createClass({
     
     return price;
   },
+  
+  addBuildToCart: function () {
+    var item = ProductStore.getProductByHash(Utils.getHammockHash({
+          'model':          this.props.model,
+          'primaryColor':   this.props.primaryColor,
+          'secondaryColor': this.props.secondaryColor,
+          'includeStraps':  this.props.includeStraps
+        }));
+    
+    CartActions.addItem(item);
+    CartActions.showCart();
+    $('html').addClass('freeze-page-size');
+    $('body').addClass('freeze-page-size');
+  },
+  
   render: function () {
     var classes = classNames({
       'hammock-builder-ctrls':  true,
@@ -59,7 +75,8 @@ CustomizerCtrls = React.createClass({
     }),
     secondaryColor = (this.props.secondaryColor)
                         ? this.props.secondaryColor.toLowerCase()
-                        : '';
+                        : '',
+    self = this;
     
     return (
       <div className={classes}>
@@ -68,15 +85,15 @@ CustomizerCtrls = React.createClass({
         </div>
         <div className='row btn-grp ptm'>
           <button className='btn gray left-btn shadow builder-ctrls-model-btn model-single-btn'
-              onClick={this.setHammockModel.bind(this, CustomizerConstants.Models.SINGLE)}>
+              onClick={this.setHammockModel.bind(self, CustomizerConstants.Models.SINGLE)}>
             {CustomizerConstants.Models.SINGLE}
           </button>
           <button className='btn gray middle-btn shadow builder-ctrls-model-btn model-double-btn'
-              onClick={this.setHammockModel.bind(this, CustomizerConstants.Models.DOUBLE)}>
+              onClick={this.setHammockModel.bind(self, CustomizerConstants.Models.DOUBLE)}>
             {CustomizerConstants.Models.DOUBLE}
           </button>
           <button className='btn gray right-btn shadow builder-ctrls-model-btn model-hammie-btn'
-              onClick={this.setHammockModel.bind(this, CustomizerConstants.Models.HAMMIE)}>
+              onClick={this.setHammockModel.bind(self, CustomizerConstants.Models.HAMMIE)}>
             {CustomizerConstants.Models.HAMMIE}
           </button>
         </div>
@@ -96,22 +113,22 @@ CustomizerCtrls = React.createClass({
         
         <div className={'row ptm pbl primary-color-choices ' + this.props.primaryColor.toLowerCase()}>
           <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
-            <div className='red-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(null, CustomizerConstants.Colors.RED)}></div>
+            <div className='red-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(self, CustomizerConstants.Colors.RED)}></div>
           </div>
           <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
-            <div className='blue-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(null, CustomizerConstants.Colors.BLUE)}></div>
+            <div className='blue-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(self, CustomizerConstants.Colors.BLUE)}></div>
           </div>
           <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
-            <div className='tan-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(this, CustomizerConstants.Colors.TAN)}></div>
+            <div className='tan-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(self, CustomizerConstants.Colors.TAN)}></div>
           </div>
           <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
-            <div className='burgundy-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(this, CustomizerConstants.Colors.BURGUNDY)}></div>
+            <div className='burgundy-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(self, CustomizerConstants.Colors.BURGUNDY)}></div>
           </div>
           <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
-            <div className='turquoise-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(this, CustomizerConstants.Colors.TURQUOISE)}></div>
+            <div className='turquoise-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(self, CustomizerConstants.Colors.TURQUOISE)}></div>
           </div>
           <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
-            <div className='black-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(this, CustomizerConstants.Colors.BLACK)}></div>
+            <div className='black-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(self, CustomizerConstants.Colors.BLACK)}></div>
           </div>
         </div>
         
@@ -122,22 +139,22 @@ CustomizerCtrls = React.createClass({
           
           <div className={'ptm secondary-color-choices ' + secondaryColor}>
             <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
-              <div className='red-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(null, CustomizerConstants.Colors.RED)}></div>
+              <div className='red-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(self, CustomizerConstants.Colors.RED)}></div>
             </div>
             <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
-              <div className='blue-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(null, CustomizerConstants.Colors.BLUE)}></div>
+              <div className='blue-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(self, CustomizerConstants.Colors.BLUE)}></div>
             </div>
             <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
-              <div className='tan-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(null, CustomizerConstants.Colors.TAN)}></div>
+              <div className='tan-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(self, CustomizerConstants.Colors.TAN)}></div>
             </div>
             <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
-              <div className='burgundy-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(null, CustomizerConstants.Colors.BURGUNDY)}></div>
+              <div className='burgundy-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(self, CustomizerConstants.Colors.BURGUNDY)}></div>
             </div>
             <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
-              <div className='turquoise-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(null, CustomizerConstants.Colors.TURQUOISE)}></div>
+              <div className='turquoise-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(self, CustomizerConstants.Colors.TURQUOISE)}></div>
             </div>
             <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
-              <div className='black-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(null, CustomizerConstants.Colors.BLACK)}></div>
+              <div className='black-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(self, CustomizerConstants.Colors.BLACK)}></div>
             </div>
           </div>
         </div>
@@ -148,7 +165,7 @@ CustomizerCtrls = React.createClass({
           <div className='col-xs-6 builder-ctrls-lbl straps-lbl'>I need straps</div>
           <div className='col-xs-6'>
             <div className='straps-toggler'>
-              <Toggler on={this.props.includeStraps} onToggle={this.toggleStraps.bind(this)} />
+              <Toggler on={this.props.includeStraps} onToggle={this.toggleStraps.bind(self)} />
             </div>
           </div>
         </div>
@@ -160,7 +177,7 @@ CustomizerCtrls = React.createClass({
         </div>
         
         <div className='row pbl'>
-          <button className='btn green solid shadow add-to-cart-btn'>Add to cart</button>
+          <button className='btn green solid shadow add-to-cart-btn' onClick={this.addBuildToCart.bind(self)}>Add to cart</button>
         </div>
       </div>
     );
