@@ -9,8 +9,6 @@ ProductItem = React.createClass({
   addItemToCart: function () {
     CartActions.addItem(this.props.product);
     CartActions.showCart();
-    $('html').addClass('freeze-page-size');
-    $('body').addClass('freeze-page-size');
   },
   
   render: function () {

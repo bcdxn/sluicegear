@@ -1,4 +1,5 @@
-var CartStore = require('../../stores/cart'),
+var CartStore   = require('../../stores/cart'),
+    CartActions = require('../../actions/cart'),
     Header;
 
 Header = React.createClass({
@@ -21,6 +22,10 @@ Header = React.createClass({
     } else {
       this.setState({ menuExpanded: true });
     }
+  },
+  
+  showCart: function () {
+    CartActions.showCart();
   },
   
   componentDidMount: function () {
@@ -53,7 +58,7 @@ Header = React.createClass({
             <a className={'col-xs-12 col-sm-2 header-menu-item about ' + ((this.props.active === 'home') ? 'about' : '')}  href='/about'>
               About
             </a>
-            <div className='col-xs-12 col-sm-2 header-cart-item'>
+            <div className='col-xs-12 col-sm-2 header-cart-item' onClick={this.showCart.bind(self)}>
               <div className='header-cart-content'>
                 <span className='header-cart-lbl'>Cart</span>
                 <span className='header-cart-quantity'>{this.state.numItems}</span>

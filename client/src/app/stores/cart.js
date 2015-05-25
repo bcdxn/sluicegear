@@ -82,11 +82,15 @@ CartStore.dispatchToken = Dispatcher.register(function(action) {
     case CartConstants.ActionTypes.SHOW_CART:
       _showCart();
       CartStore.emitChange();
+      $('html').addClass('freeze-page-size');
+      $('body').addClass('freeze-page-size');
       break;
     
     case CartConstants.ActionTypes.HIDE_CART:
       _hideCart(action.itemId);
       CartStore.emitChange();
+      $('html').removeClass('freeze-page-size');
+      $('body').removeClass('freeze-page-size');
       break
     
     default:

@@ -61,8 +61,6 @@ CustomizerCtrls = React.createClass({
     
     CartActions.addItem(item);
     CartActions.showCart();
-    $('html').addClass('freeze-page-size');
-    $('body').addClass('freeze-page-size');
   },
   
   render: function () {
