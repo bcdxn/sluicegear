@@ -1,7 +1,8 @@
-var CartItemList = require('./cart-item-list'),
-    classNames   = require('classnames'),
-    CartStore    = require('../../stores/cart'),
-    CartActions  = require('../../actions/cart');
+var CartItemList  = require('./cart-item-list'),
+    classNames    = require('classnames'),
+    CartStore     = require('../../stores/cart'),
+    CartActions   = require('../../actions/cart'),
+    PaypalSpinner = require('../modal/paypal-spinner');
 
 var Cart = React.createClass({
   getDefaultProps: function () {
@@ -27,8 +28,6 @@ var Cart = React.createClass({
   
   hideCart: function () {
     CartActions.hideCart();
-    $('html').removeClass('freeze-page-size');
-    $('body').removeClass('freeze-page-size');
   },
 
   handleResize: function (e) {
@@ -48,7 +47,18 @@ var Cart = React.createClass({
   _onCartChange: function () {
     this.setState({ 'items': CartStore.getAllItems(), 'isCartVisible': CartStore.getIsCartVisible() });
   },
-
+  
+  checkout: function () {
+    // Only allow checkout when the cart is not empty
+    if (this.state.items.length > 0) {
+      console.log(this.state.items);
+      this.hideCart();
+      React.render(<PaypalSpinner />, document.getElementById('modal'));
+      $('html').addClass('freeze-page-size');
+      $('body').addClass('freeze-page-size');
+    }
+  },
+  
   render: function () {
     var cartStyle = {
           height: this.state.cartHeight
@@ -76,12 +86,12 @@ var Cart = React.createClass({
         }
 
     return (
-      <div className={'shopping-cart-wrapper ' + ((this.state.isCartVisible) ? 'show-shopping-cart' : '')} onClick={this.hideCart.bind(null)}>
+      <div className={'shopping-cart-wrapper ' + ((this.state.isCartVisible) ? 'show-shopping-cart' : '')}>
         <div className={cartClasses} style={cartStyle}>
           <div className='shopping-cart-global-ctrls'>
             <div className='btn-grp'>
               <button className='btn blue solid left-btn shadow cart-close-btn' onClick={this.hideCart.bind(null)}>Keep Shopping</button>
-              <button className={checkoutBtnClasses}>Checkout</button>
+              <button className={checkoutBtnClasses} onClick={this.checkout.bind(null)}>Checkout</button>
             </div>
           </div>
           <div className='empty-cart-msg ptl'>{this.props.emptyCartMsg}</div>
