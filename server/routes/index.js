@@ -17,6 +17,10 @@ module.exports = function (server, router) {
   
   /* Page Routes
   ------------------------------------------------------------------------------------*/
+  router.get('/', function (req, res) {
+    res.render('landing', { version: Config.VERSION });
+  });
+  
   router.get('/shop', function (req, res) {
     res.render('shop', { version: Config.VERSION });
   });

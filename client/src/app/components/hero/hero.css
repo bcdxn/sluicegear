@@ -1,0 +1,129 @@
+.hero-wrapper {
+  min-height: 380px;
+  position: relative;
+}
+
+.slides {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+section.slide {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  left: 0;
+  opacity: 0.0;
+  position: absolute;
+  top: 0;
+  -webkit-transition: opacity 0.5s ease-in-out;
+     -moz-transition: opacity 0.5s ease-in-out;
+          transition: opacity 0.5s ease-in-out;
+  width: 100%;
+}
+
+section.slide.active {
+  opacity: 1.0;
+}
+
+section.slide.sunset { background-image: url('../img/hero/sunset-bg.jpg'); }
+section.slide.dock { background-image: url('../img/hero/dock-bg.jpg'); }
+section.slide.water { background-image: url('../img/hero/water-bg.jpg'); }
+section.slide.beach { background-image: url('../img/hero/beach-bg.jpg'); }
+
+.banner-copy-wrapper {
+  display: table;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+.banner-copy {
+  color: #fff;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.banner-copy-inner {
+  margin: auto;
+  max-width: 350px;
+  width: 100%;
+}
+
+.banner-copy h1 {
+  font-family: 'Engagement', Helvetica, Arial, sans-serif;
+  font-size: 60px;
+  text-shadow: 0px 1px 10px rgba(0,0,0,1.0);
+  padding: 0 10px 0 10px;
+  text-align: center;
+}
+
+.banner-copy h2 {
+  font-family: 'Open Sans Condensed', Helvetica, Arial, sans-serif;
+  font-size: 32px;
+  padding: 15px 10px 0 10px;
+  text-shadow: 0 1px 5px rgba(0,0,0,1.0);
+  text-align: center;
+}
+
+.banner-copy h2.small {
+  font-family: 'Open Sans Condensed', Helvetica, Arial, sans-serif;
+  font-size: 24px;
+  padding: 10px 10px 0 10px;
+  text-shadow: 0 1px 5px rgba(0,0,0,1.0);
+  text-align: center;
+}
+
+.btn.hero-btn {
+  display: block;
+  font-family: 'Open Sans Condensed', Helvetica, Arial, sans-serif;
+  font-size: 24px;
+  margin: 40px auto;
+  max-width: 200px;
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
+}
+
+.hero-ctrls {
+  bottom: 0;
+  height: 30px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+}
+
+.hero-ctrls-inner {
+  height: 30px;
+  margin: auto;
+  width: 112px;
+}
+
+.hero-ctrl-btn {
+  background: #fff;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  float: left;
+  height: 8px;
+  margin: 8px 8px 10px 8px;
+  width: 8px;
+}
+
+.hero-ctrl-btn.active {
+  background: none;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  height: 14px;
+  margin: 5px 5px 7px 5px;
+  width: 14px;
+}
