@@ -52,14 +52,21 @@ CustomizerCtrls = React.createClass({
   },
   
   addBuildToCart: function () {
-    var item = ProductStore.getProductByHash(Utils.getHammockHash({
+    var hammockItem = ProductStore.getProductByHash(Utils.getHammockHash({
           'model':          this.props.model,
           'primaryColor':   this.props.primaryColor,
           'secondaryColor': this.props.secondaryColor,
-          'includeStraps':  this.props.includeStraps
-        }));
+        })),
+        strapsItem;
+        
+    CartActions.addItem(hammockItem);
     
-    CartActions.addItem(item);
+    if (this.props.includeStraps){
+      strapsItem = ProductStore.getProductByHash(Utils.getStrapsHash());
+      CartActions.addItem(strapsItem);
+    }
+    
+    
     CartActions.showCart();
   },
   
