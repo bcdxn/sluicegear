@@ -1,0 +1,20 @@
+.order-preview-item {
+  border-bottom: 1px solid #ccc;
+}
+
+.order-preview-product-img-wrapper img {
+  width: 100%;
+}
+
+.order-preview-description {
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  line-height: 120%;
+  padding: 10px;
+}
+
+.order-preview-price {
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  line-height: 120%;
+  padding: 10px;
+  text-align: right;
+}

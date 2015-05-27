@@ -59,7 +59,7 @@ PaypalApi.createPayment = function (details) {
   
   // Add approved callback url to the request body
   paypalPayment.redirect_urls.return_url = Config.SLUICE_ROOT_URL + port +
-    '/#/shop?checkout=approve';
+    '/shop?checkout=approve';
   // Add canceled callback url to the request body
   paypalPayment.redirect_urls.cancel_url = process.env.SLUICE_ROOT_URL + port + '/';
   
@@ -107,19 +107,21 @@ PaypalApi.createPayment = function (details) {
  * @return {Promise<Order>}           The corresponding order for the given paymentID
  */
 PaypalApi.executePayment = function (paymentId, payerId) {
-  var deferred = q.defer(),
+  var deferred = Q.defer(),
       payer = {
-        payer_id: payerId
+        'payer_id': payerId
       };
+      
   // Finalize Payment with paypal API
-  paypal.payment.execute(paymentId, payer, {}, function (err, resp) {
+  paypal.payment.execute(paymentId, payer, function (err, resp) {
     var retError = {};
 
     if (err) {
+      // Log the error
       console.log(err);
-
       if (err.response.name === 'PAYMENT_STATE_INVALID') {
-        retError.code = HttpCode.Conflict.CODE;
+        retError.code    = HttpCode.BadRequest.CODE;
+        retError.name    = 'PAYMENT_EXECUTED';
         retError.message = 'The order has already been placed and approved.';
       } else {
         console.log(err);

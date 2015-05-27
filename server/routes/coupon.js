@@ -1,6 +1,7 @@
 'use strict';
 
-var HttpCode = require('../common/http-code');
+var HttpCode = require('../common/http-code'),
+    Config   = require('../config');
 
 module.exports = function (Api, router) {
   // Get coupon with matching coupon code
@@ -16,7 +17,7 @@ module.exports = function (Api, router) {
           });
         }
       }).catch(function (err) {
-        if (err.code) {
+        if (err.code || Config.NODE_ENV === 'development') {
           res.status(err.code).json(err);
         } else {
           console.log(err);

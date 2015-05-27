@@ -127,7 +127,7 @@ module.exports = function (server) {
       var couponDeferred = Q.defer();
       
       if (!newOrder.coupon) {
-        couponDeferred.resolve({});
+        couponDeferred.resolve({ 'products': products });
       } else {
         Dao.Model.Coupon.find({
           where: { 'code': newOrder.coupon.code }
@@ -179,10 +179,10 @@ module.exports = function (server) {
       }
       
       PayPalApi.createPayment({
-        'total': (order.itemsTotalPrice + order.shippingPrice + order.adjustment + order.salesTax) / 100,
-        'subtotal': (order.itemsTotalPrice + order.adjustment) / 100,
-        'tax': order.salesTax,
-        'shipping': order.shippingPrice,
+        'total': ((order.itemsTotalPrice + order.shippingPrice + order.adjustment + order.salesTax) / 100).toFixed(2),
+        'subtotal': ((order.itemsTotalPrice + order.adjustment) / 100).toFixed(2),
+        'tax': (order.salesTax / 100).toFixed(2),
+        'shipping': (order.shippingPrice / 100).toFixed(2),
         'description': shortDescription(newOrder, (order.itemsTotalPrice + order.shippingPrice + order.adjustment + order.salesTax))
       }).then(function (payment) {
         Dao.Model.Order.create(order).then(function (savedOrder) {
@@ -192,13 +192,19 @@ module.exports = function (server) {
           
           Dao.Model.OrderItem.bulkCreate(items).then(function () {
             savedOrder.update({ 'paymentId': payment.paymentId }).then(function () {
-              deferred.resolve(Dao.Model.Order.find({
+              return Dao.Model.Order.find({
                 'where': { 'id':  savedOrder.id },
                 'include': [{
                   'model': Dao.Model.OrderItem,
                   'include': [{ 'model': Dao.Model.Product }]
                 }]
-              }));
+              });
+            }).then(function (order) {
+              var plainOrder = order.get();
+              
+              plainOrder.approvalUrl = payment.approvalUrl;
+              
+              deferred.resolve(plainOrder);
             }).catch(function (err) {
               // TODO: HANDLE ERROR
               console.log(err);
@@ -232,30 +238,91 @@ module.exports = function (server) {
   };
   
   /**
+   * Find a specific order. For now we will use the paypal id to
+   * find payment records.
+   * 
+   * @param {String}           paymentId The payment id from the paypal api
+   * @param {Promise<Payment>}           The payment object
+   */
+  OrderApi.read = function (paymentId) {
+    var deferred = Q.defer();
+    
+    console.log(paymentId)
+    
+    Dao.Model.Order.find({
+      'where':   { 'paymentId': paymentId },
+      'attributes': ['itemsTotalPrice', 'shippingPrice', 'salesTax', 'adjustment', 'paymentMethod', 'paymentId', 'CouponId'],
+      'include': [{
+          'model': Dao.Model.OrderItem,
+          'attributes': ['personalization'],
+          'include': [{
+            'model': Dao.Model.Product,
+            'attributes': ['sku', 'name', 'description', 'price'],
+            'include': [{
+              'model': Dao.Model.ProductAttribute,
+              'attributes': ['key', 'value']
+            }]
+          }]
+        },
+        {
+          'model': Dao.Model.Coupon
+        }]
+    }).then(function (order) {
+      if (order) {
+        deferred.resolve(order.get());
+      } else {
+        deferred.reject({
+          code: HttpCode.NotFound.CODE,
+          message: 'No payment information found.'
+        });
+      }
+    }).catch(function (err) {
+      deferred.reject(err);
+    });
+    
+    return deferred.promise;
+  };
+  
+  /**
    * All fields on an order are immutable except for payment details.
    * Therefore an update on an order is used to change the payment state
    * 
-   * @param  {String}    paymentId The payment id from the paypal api
-   * @param  {String}    payerId   The payer id from the paypal api
-   * @return {Promise<>}
+   * @param  {String}         paymentId The payment id from the paypal api
+   * @param  {String}         payerId   The payer id from the paypal api
+   * @return {Promise<Order>}           The updated order
    */
   OrderApi.update = function (paymentId, payerId) {
     var deferred = Q.defer();
     
-    PayPalApi.executePayment(paymentId, payerId).then(function () {
-      return Dao.Model.Order.update(
-        { paymentReceived: true },
-        { 'where': {'paymentId': paymentId } }
-      );
-    }).then(function () {
-      deferred.resolve(Dao.Model.Order.find({
-        'where': { 'paymentId':  paymentId },
-        'include': [{
-          'model': Dao.Model.OrderItem,
-          'include': [{ 'model': Dao.Model.Product }]
-        }]
-      }));
+    OrderApi.read(paymentId).then(function (order) {
+      if (order) {
+        PayPalApi.executePayment(paymentId, payerId).then(function () {
+          Dao.Model.Order.update(
+            { paymentReceived: true },
+            { 'where': {'paymentId': paymentId } }
+          ).then(function () {
+            deferred.resolve(order);
+          });
+        }).catch(function (err) {
+          if (!err.code) {
+            // TODO: HANDLE ERROR
+            console.log(err);
+            deferred.reject({
+              code: HttpCode.InternalServerError.CODE,
+              message: 'Error updating payment status in database.'
+            });
+          } else {
+            deferred.reject(err);
+          }
+        });
+      } else {
+        deferred.reject({
+          code: HttpCode.NotFound.CODE,
+          message: 'Order not found'
+        });
+      }
     }).catch(function (err) {
+      console.log('outer catch')
       if (!err.code) {
         // TODO: HANDLE ERROR
         console.log(err);
@@ -275,5 +342,8 @@ module.exports = function (server) {
 };
 
 function shortDescription(order, totalPrice) {
-  return order.items.length + ' items -- $' + (totalPrice / 100);
+  return order.items.length + ((order.items.length > 1)
+    ? (' items')
+    : (' item')) +
+     ' -- $' + (totalPrice / 100).toFixed(2);
 }

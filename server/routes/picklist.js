@@ -1,6 +1,7 @@
 'use strict';
 
-var HttpCode = require('../common/http-code');
+var HttpCode = require('../common/http-code'),
+    Config   = require('../config');
 
 module.exports = function (Api, router) {
   // Get *all* picklist entries
@@ -10,7 +11,7 @@ module.exports = function (Api, router) {
         res.status(200).json(picklist);
       }).catch(function (err) {
         // TODO: HANDLE ERROR
-        if (err.code) {
+        if (err.code || Config.NODE_ENV === 'development') {
           res.status(err.code).json(err);
         } else {
           console.log(err);

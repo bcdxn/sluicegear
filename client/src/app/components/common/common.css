@@ -103,6 +103,16 @@
   color: #fff;
 }
 
+.btn.red {
+  background: none;
+  border: 2px solid #c9302c;
+  color: #c9302c;
+}
+.btn.red.solid {
+  background: #c9302c;
+  color: #fff;
+}
+
 .btn.disabled {
   border-color: #aaa;
   color: #aaa;
@@ -111,6 +121,14 @@
 .btn.disabled.solid {
   background: #aaa;
   color: #fff;
+}
+
+.btn.link-btn {
+  border: none;
+}
+
+.btn.link-btn:hover {
+  text-decoration: underline;
 }
 
 /* Common Margins and Paddings

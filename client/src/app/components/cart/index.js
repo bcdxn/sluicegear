@@ -2,7 +2,8 @@ var CartItemList  = require('./cart-item-list'),
     classNames    = require('classnames'),
     CartStore     = require('../../stores/cart'),
     CartActions   = require('../../actions/cart'),
-    PaypalSpinner = require('../modal/paypal-spinner');
+    PaypalSpinner = require('../modal/paypal-spinner'),
+    Modal         = require('../modal');
 
 var Cart = React.createClass({
   getDefaultProps: function () {
@@ -49,6 +50,9 @@ var Cart = React.createClass({
   },
   
   checkout: function () {
+    var self  = this,
+        order = {};
+    
     // Only allow checkout when the cart is not empty
     if (this.state.items.length > 0) {
       console.log(this.state.items);
@@ -56,7 +60,33 @@ var Cart = React.createClass({
       React.render(<PaypalSpinner />, document.getElementById('modal'));
       $('html').addClass('freeze-page-size');
       $('body').addClass('freeze-page-size');
+      
+      order.items = this.state.items.slice(0);
+      order.paymentMethod  = 'paypal';
+      order.coupon = {};
+      
+      console.log(order.items);
+      
+      $.ajax({
+        type:'POST',
+        url: '/api/Order',
+        data: order
+      }).done(function (data) {
+        self._onOrderCreation(data);
+      }).fail(function (err) {
+        self._onOrderCreationError(err);
+      });
     }
+  },
+  
+  _onOrderCreation: function (data) {
+    window.location.replace(data.approvalUrl);
+  },
+  
+  _onOrderCreationError: function (err) {
+    console.log(err);
+    React.unmountComponentAtNode(document.getElementById('modal'));
+    React.render(<Modal level='error' message={err.message} />, document.getElementById('modal'));
   },
   
   render: function () {

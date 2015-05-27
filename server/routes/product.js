@@ -1,6 +1,7 @@
 'use strict';
 
-var HttpCode = require('../common/http-code');
+var HttpCode = require('../common/http-code'),
+    Config   = require('../config');
 
 module.exports = function (Api, router) {
   // Get *all* products
@@ -9,7 +10,7 @@ module.exports = function (Api, router) {
       Api.Product.read().then(function (products) {
         res.status(200).json(products);
       }).catch(function (err) {
-        if (err.code) {
+        if (err.code || Config.NODE_ENV === 'development') {
           res.status(err.code).json(err);
         } else {
           console.log(err);
@@ -39,7 +40,7 @@ module.exports = function (Api, router) {
           res.status(HttpCode.Okay.CODE).json(products[0]);
         }
       }).catch(function (err) {
-        if (err.code) {
+        if (err.code || Config.NODE_ENV === 'development') {
           res.status(err.code).json(err);
         } else {
           console.log(err);

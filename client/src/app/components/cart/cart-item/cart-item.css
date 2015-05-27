@@ -4,9 +4,17 @@
   position: relative;
 }
 
+.cart-item:after {
+  content: '.';
+  clear: both;
+  display: block;
+  height: 0;
+  visibility: hidden;
+}
+
 .cart-item-img-wrapper {
   display: inline-block;
-  height: 90px;
+  height: 125px;
   left: 0;
   position: absolute;
   width: 125px;
@@ -21,7 +29,7 @@
   box-sizing: border-box;
   padding-left: 125px;
   padding-right: 32px;
-  min-height: 90px;
+  min-height: 125px;
   position: relative;
   width: 100%;
 }
