@@ -1,7 +1,9 @@
 var Hero = React.createClass({
   getInitialState: function () {
     return {
-      'heroHeight': window.innerHeight - $('#headerContainer').height() // TODO: also add banner
+      'heroHeight': window.innerHeight - $('#headerContainer').height(), // TODO: also add banner
+      'activeSlide': 0,
+      'timeoutId': null
     };
   },
   
@@ -13,6 +15,7 @@ var Hero = React.createClass({
 
   componentDidMount: function () {
     window.addEventListener('resize', this._onResize);
+    this._startCarousel();
   },
 
   componentWillUnmount: function () {
@@ -23,6 +26,30 @@ var Hero = React.createClass({
     window.location.href = '/shop';
   },
   
+  _startCarousel: function (currIndex) {
+    var btnIndex = currIndex || 0,
+        timeoutId,
+        self = this;
+  
+    if (this.state.timeoutId) {
+      clearTimeout(this.state.timeoutId);
+    }
+    
+    timeoutId = setTimeout(function () {
+  
+      if (btnIndex < 3) {
+        btnIndex += 1;
+      } else {
+        btnIndex = 0;
+      }
+  
+      self.setState({ 'activeSlide': btnIndex });
+      self._startCarousel(btnIndex);
+    }, 4000);
+    
+    this.setState({ 'timeoutId': timeoutId });
+  },
+  
   render: function () {
     var style = {
           'height': this.state.heroHeight + 'px'
@@ -31,10 +58,10 @@ var Hero = React.createClass({
     return (
       <div className='hero-wrapper' style={style}>
         <div className='slides'>
-          <section className='slide sunset active'></section>
-          <section className='slide dock'></section>
-          <section className='slide water'></section>
-          <section className='slide beach'></section>
+          <section className={'slide sunset ' + ((this.state.activeSlide === 0) ? 'active' : '')}></section>
+          <section className={'slide dock ' + ((this.state.activeSlide === 1) ? 'active' : '')}></section>
+          <section className={'slide water ' + ((this.state.activeSlide === 2) ? 'active' : '')}></section>
+          <section className={'slide beach ' + ((this.state.activeSlide === 3) ? 'active' : '')}></section>
         </div>
         <div className='banner-copy-wrapper'>
           <div className='banner-copy'>
@@ -48,10 +75,10 @@ var Hero = React.createClass({
         </div>
         <div className='hero-ctrls'>
           <ul className='hero-ctrls-inner'>
-            <li className='hero-ctrl-btn active' data-slide='sunset'></li>
-            <li className='hero-ctrl-btn' data-slide='dock'></li>
-            <li className='hero-ctrl-btn' data-slide='water'></li>
-            <li className='hero-ctrl-btn' data-slide='beach'></li>
+            <li className={'hero-ctrl-btn ' + ((this.state.activeSlide === 0) ? 'active' : '')}></li>
+            <li className={'hero-ctrl-btn ' + ((this.state.activeSlide === 1) ? 'active' : '')}></li>
+            <li className={'hero-ctrl-btn ' + ((this.state.activeSlide === 2) ? 'active' : '')}></li>
+            <li className={'hero-ctrl-btn ' + ((this.state.activeSlide === 3) ? 'active' : '')} ></li>
           </ul>
         </div>
       </div>
