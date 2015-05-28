@@ -150,6 +150,51 @@ var Utils = {
     }, ms);
   
     return false;
+  },
+  
+  /**
+   * Add scroll animation to the infographic.
+   */
+  animateInfographic: function () {
+    var self = this;
+    
+    $(window).on('scroll', function() {
+      if ($('#infographicBottom').length > 0) {
+        if (self.isElementInViewport($('#infographicBottom').get(0), 0) &&
+            !($('#infographicThread').hasClass('animated'))) {
+  
+          setTimeout(function () {
+            $('#infographicThread').addClass('animated bounceIn');
+            setTimeout(function () {
+              $('#infographicClip').addClass('animated bounceIn');
+              setTimeout(function() {
+                $('#infographicStash').addClass('animated bounceIn');
+                setTimeout(function () {
+                  $('#infographicSnap').addClass('animated bounceIn');
+                }, 800);
+              }, 800);
+            }, 800);
+          }, 100);
+        } else if (!self.isElementInViewport($('#infographicTop').get(0), 0)) {
+          $('#infographicThread').removeClass('animated bounceIn');
+          $('#infographicClip').removeClass('animated bounceIn');
+          $('#infographicStash').removeClass('animated bounceIn');
+          $('#infographicSnap').removeClass('animated bounceIn');
+        }
+      }
+    });
+  },
+  
+  /**
+   * Check if the given element is in the viewport.
+   *
+   * @param  {Element} el HTML element
+   * @return {Boolean}    True if the given element is in viewport
+   */
+  isElementInViewport: function (el, offset) {
+    var rect = el.getBoundingClientRect();
+  
+    return (rect.top - window.innerHeight + offset) < 0;
   }
 
 };

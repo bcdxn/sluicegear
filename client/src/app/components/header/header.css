@@ -26,6 +26,8 @@
 
 .header {
   height: 100%;
+  margin: auto;
+  max-width: 1024px;
 }
 
 .header-logo {
@@ -36,6 +38,10 @@
   height: 100%;
   line-height: 59px;
   padding: 0 10px;
+  text-decoration: none;
+}
+
+.header-logo:hover {
   text-decoration: none;
 }
 

@@ -20,6 +20,7 @@ if (document.getElementById('heroContainer')) {
   React.render(<Specs />, document.getElementById('specsContainer'));
   Utils.introSectionParallax();
   Utils.colorSectionParallax();
+  Utils.animateInfographic();
 }
 
 // Shop specific components
