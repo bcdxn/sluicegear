@@ -1,0 +1,61 @@
+.about-copy-wrapper .container-fluid {
+  max-width: 1024px;
+}
+
+.about-copy-wrapper  h2 {
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.about-content {
+  background: none;
+}
+
+.about-copy-wrapper {
+  background: #fff;
+  padding-top: 50px;
+}
+
+.about-content h2 {
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.about-txt {
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-size: 22px;
+  line-height: 1.5;
+}
+
+.sluice-kids img {
+  display: block;
+  margin: auto;
+  max-width: 400px;
+  width: 100%;
+}
+
+.about-quote-section {
+  margin-top: 40px;
+}
+
+.about-quote-section .container-fluid {
+  margin: auto;
+  max-width: 1024px;
+}
+
+.quote-block {
+  color: #444;
+  text-align: left;
+  font-style: italic;
+}
+
+.quote-attribution {
+  text-align: left;
+}
+
+.quote-location {
+  font-size: 16px;
+  text-align: left;
+}

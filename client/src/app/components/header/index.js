@@ -55,7 +55,7 @@ Header = React.createClass({
             <a className={'col-xs-12 col-sm-2 header-menu-item shop ' + ((this.props.active === 'shop') ? 'active' : '')} href='/shop'>
               Shop
             </a>
-            <a className={'col-xs-12 col-sm-2 header-menu-item about ' + ((this.props.active === 'home') ? 'about' : '')}  href='/about'>
+            <a className={'col-xs-12 col-sm-2 header-menu-item about ' + ((this.props.active === 'about') ? 'active' : '')}  href='/about'>
               About
             </a>
             <div className='col-xs-12 col-sm-2 header-cart-item' onClick={this.showCart.bind(self)}>

@@ -25,5 +25,9 @@ module.exports = function (server, router) {
     res.render('shop', { version: Config.VERSION });
   });
   
+  router.get('/about', function (req, res) {
+    res.render('about', { version: Config.VERSION });
+  });
+  
   server.use(router);
 };

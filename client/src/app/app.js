@@ -22,13 +22,12 @@ if (document.getElementById('heroContainer')) {
   Utils.introSectionParallax();
   Utils.colorSectionParallax();
   Utils.animateInfographic();
-}
-
-// Shop specific components
-if (document.getElementById('customizerContainer')) {
+} else if (document.getElementById('customizerContainer')) { // Shop specific components
   React.render(<Header active='shop'/>, document.getElementById('headerContainer'));
   React.render(<Customizer />, document.getElementById('customizerContainer'));
   React.render(<ProductList />, document.getElementById('productListContainer'));
+} else {  // About specific components
+  React.render(<Header active='about'/>, document.getElementById('headerContainer'));
 }
 
 $(document).ready(function () {
