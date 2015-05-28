@@ -1,4 +1,5 @@
 var classNames = require('classnames'),
+    $          = require('jquery'),
     ErrorModal;
 
 function _close() {

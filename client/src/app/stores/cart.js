@@ -2,6 +2,8 @@ var Dispatcher     = require('../dispatcher'),
     CartConstants  = require('../constants/cart'),
     assign         = require('object-assign'),
     EventEmitter   = require('events').EventEmitter,
+    $              = require('jquery'),
+    Cookies        = require('js-cookie'),
     _cartItems     = [],
     _isCartVisible = false,
     CartStore;
@@ -14,6 +16,7 @@ var Dispatcher     = require('../dispatcher'),
 function _addCartItem(item) {
   item.id = 'ci_' + item.sku + '_' + Date.now();
   _cartItems.push(item);
+  Cookies.set('cartItemHistory', _cartItems, { expires: 7, path: '/' });
 }
 
 /**
@@ -25,6 +28,8 @@ function _removeCartItem(id) {
   _cartItems = _cartItems.filter(function (item) {
     return item.id !== id;
   });
+  
+  Cookies.set('cartItemHistory', _cartItems, { expires: 7, path: '/' });
 }
 
 /**
@@ -52,6 +57,12 @@ CartStore = assign({}, EventEmitter.prototype, {
 
   removeChangeListener: function(callback) {
     this.removeListener('change', callback);
+  },
+  
+  initialize: function (){
+    Cookies.json = true;
+    _cartItems = Cookies.get('cartItemHistory') || [];
+    this.emitChange();
   },
 
   getItem: function(id) {
@@ -98,5 +109,7 @@ CartStore.dispatchToken = Dispatcher.register(function(action) {
       break;
   }
 });
+
+CartStore.initialize();
 
 module.exports = CartStore;

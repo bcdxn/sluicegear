@@ -2,6 +2,7 @@ var OrderPreviewList = require('./order-preview-list'),
     OrderStore       = require('../../../stores/order'),
     Modal            = require('../../modal'),
     PaypalSpinner    = require('../paypal-spinner'),
+    $                = require('jquery'),
     OrderPreview;
 
 OrderPreview = React.createClass({

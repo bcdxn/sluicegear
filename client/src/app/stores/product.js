@@ -1,6 +1,7 @@
 var Dispatcher   = require('../dispatcher'),
     assign       = require('object-assign'),
     EventEmitter = require('events').EventEmitter,
+    $            = require('jquery'),
     _products    = [],
     ProductStore;
 
