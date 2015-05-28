@@ -6,6 +6,8 @@ var Header       = require('./components/header'),
     OrderActions = require('./actions/order'),
     OrderPreview = require('./components/modal/order-preview'),
     Hero         = require('./components/hero'),
+    Specs        = require('./components/specs'),
+    Utils        = require('./utils'),
     queryParams  = $.getQueryParameters();
 
 React.render(<Footer />, document.getElementById('footerContainer'));
@@ -15,6 +17,9 @@ React.render(<Cart />, document.getElementById('cartContainer'));
 if (document.getElementById('heroContainer')) {
   React.render(<Header active='home'/>, document.getElementById('headerContainer'));
   React.render(<Hero />, document.getElementById('heroContainer'));
+  React.render(<Specs />, document.getElementById('specsContainer'));
+  Utils.introSectionParallax();
+  Utils.colorSectionParallax();
 }
 
 // Shop specific components

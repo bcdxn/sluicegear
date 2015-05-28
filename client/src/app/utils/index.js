@@ -36,7 +36,122 @@ var Utils = {
     attrVals[4] = length || '7 feet';
     
     return MD5(attrVals.join('|').toLowerCase());
+  },
+  
+  /**
+   * Add the parallax functionality to the background image of the
+   * intro section.
+   */
+  introSectionParallax: function () {
+    var self = this;
+    
+    // Intro Section Parallax
+    $(window).on('scroll', function (evt) {
+      var windowHeight     = $(this).height(),
+          sectionOffset,
+          start            = 0,
+          startLeftPercent = -30,
+          leftPercent      = startLeftPercent,
+          percentDelta     = Math.abs(startLeftPercent),
+          scrollDelta      = 600,
+          $section         = $('#introSectionParallaxBg');
+  
+      if ($('#introSection').length > 0) {
+        $('#introSection').offset().top;
+  
+        if (self.isUserMobile()) {
+          $section.css('left', '0');
+          $section.css('background-position', 'center left');
+        } else {
+          if (sectionOffset > windowHeight) {
+            start = sectionOffset - windowHeight;
+          }
+  
+          if ($(this).scrollTop() > start) {
+            leftPercent = startLeftPercent +
+              (percentDelta * (($(this).scrollTop() - start) / scrollDelta));
+          }
+  
+          if (leftPercent > 0) {
+            leftPercent = 0;
+          }
+  
+          $section.css('left', leftPercent + '%');
+        }
+      }
+    });
+  },
+  
+  /**
+   * Add the parallax functionality to the background image of the
+   * color section.
+   */
+  colorSectionParallax: function () {
+    var self = this;
+    
+    // Color Section Parallax
+    $(window).on('scroll', function (evt) {
+      var windowHeight      = $(this).height(),
+          sectionOffset,
+          start             = 0,
+          startRightPercent = 0,
+          endRightPercent   = 30,
+          rightPercent      = startRightPercent,
+          percentDelta      = Math.abs(endRightPercent - startRightPercent),
+          scrollDelta       = 600,
+          $section          = $('#portableSectionParallaxBg');
+  
+      if ($('#introSection').length > 0) {
+        sectionOffset = $('#portableSection').offset().top;
+  
+        if (self.isUserMobile()) {
+          $section.css('left', '0');
+          $section.css('background-position', 'center left');
+        } else {
+          if (sectionOffset > windowHeight) {
+            start = sectionOffset - windowHeight;
+          }
+  
+          if ($(this).scrollTop() > start) {
+            rightPercent = startRightPercent +
+              (percentDelta * (($(this).scrollTop() - start) / scrollDelta));
+          }
+  
+          if (rightPercent > 30) {
+            rightPercent = 30;
+          }
+  
+          $section.css('right', rightPercent + '%');
+        }
+      }
+    });
+  },
+  
+  /**
+   * Check if the user agent is a variant of iOS.
+   *
+   * @return {Boolean} True if the user agen is iOS; else false
+   */
+  isUserMobile: function () {
+    return /(iPad|iPhone|iPod)/ig.test(navigator.userAgent) || $(window).width < 481;
+  },
+  
+  /**
+   * Scroll to the given id with the given speed.
+   *
+   * @param {String} id   The id to scroll to
+   * @param {Number} [ms] The time in milliseconds
+   */
+  scrollToId: function (id, ms) {
+    ms = ms || 1000;
+  
+    $('html,body').animate({
+      scrollTop: $(id).offset().top
+    }, ms);
+  
+    return false;
   }
+
 };
 
 jQuery.extend({

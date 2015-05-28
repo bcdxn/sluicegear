@@ -1,0 +1,122 @@
+/* Spec Styling
+------------------------------------------------------------------------------*/
+.spec-wrapper {
+  margin: auto;
+  max-width: 1024px;
+  position: relative;
+}
+
+/*---- Spec Summary Styling ----*/
+.spec-icon-wrapper {
+  background: #fff;
+}
+
+.spec-icon-wrapper:first-child { border-radius: 4px 0 0 4px; }
+.spec-icon-wrapper:last-child { border-radius: 0 4px 4px 0; }
+
+.spec-icon {
+  -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  display: block;
+  image-rendering: optimizeQuality;
+  padding: 20px 20px 10px 20px;
+  width: 100%;
+  margin: auto;
+  max-width: 140px;
+}
+
+.spec-icon.dimension { background-image: url('/img/spec-icons/icon-dimensions.png'); }
+.spec-icon.durable { background-image: url('/img/spec-icons/icon-dimensions.png'); }
+.spec-icon.weight { background-image: url('/img/spec-icons/icon-dimensions.png'); }
+.spec-icon.warranty { background-image: url('/img/spec-icons/icon-dimensions.png'); }
+
+
+.spec-icon-caption {
+  font-family: 'Open Sans Condensed', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  padding-bottom: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+.learn-more-wrapper {
+  text-align: center;
+}
+
+.spec-btn {
+  font-family: 'Open Sans Condensed', Helvetica, Arial, sans-serif;
+  font-size: 38px;
+}
+
+.learn-more-link-btn.spec-btn:hover {
+  color: #006cbd;
+  text-decoration: none;
+}
+
+/*---- Spec Table Styling ----*/
+.specs-header {
+  color: #333;
+  font-family: 'Open Sans Condensed', Helvetica, Arial, sans-serif;
+  font-size: 28px;
+  text-align: center;
+}
+
+.full-spec-container {
+  background: #fff;
+  overflow: hidden;
+  overflow-x: auto;
+  -webkit-transition: max-height 0.5s ease;
+     -moz-transition: max-height 0.5s ease;
+          transition: max-height 0.5s ease;
+  width: 100%;
+}
+.full-spec-container.hide { max-height: 0;  }
+.full-spec-container.show { max-height: 4000px;  }
+
+.sluice-table {
+  margin-bottom: 25px;
+  width: 100%;
+}
+
+.sluice-table thead tr th,
+.sluice-table tr th.table-lbl {
+  font-weight: bold;
+}
+
+.sluice-table th, td {
+  border: 1px solid #ccc;
+  font-size: 15px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  padding: 10px;
+  text-align: left;
+}
+
+.sluice-table th {
+  color: #333;
+}
+
+.sluice-table tbody tr:nth-child(odd)   {
+  background: rgba(245, 245, 245, 0.65);
+}
+
+.sluice-table ul {
+  padding-left: 20px;
+}
+
+.sluice-table ul li {
+  list-style-type: circle;
+}
+
+.spec-table-title { text-align: center; }
+
+.spec-table-desc {
+  font-size: 12px;
+  color: #666;
+  padding-top: 5px;
+  text-align: center;
+}

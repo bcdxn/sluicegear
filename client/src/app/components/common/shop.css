@@ -1,0 +1,190 @@
+.learn-more-banner {
+  border-bottom: 1px solid #ccc;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  min-height: 16px;
+  padding: 12px 0;
+  text-align: center;
+  width: 100%;
+}
+
+.learn-more-link-btn {
+  color: #008cdd;
+  cursor: pointer;
+}
+
+.learn-more-link-btn:hover {
+  text-decoration: underline;
+}
+
+.learn-more-link-arrow {
+  background-image: url('../img/controls/btn-link-arrow.svg');
+  background-size: 12px 11px;
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 11px;
+  margin: 4px 0 0 2px;
+  -webkit-transition: 0.1s ease-in-out;
+     -moz-transition: 0.1s ease-in-out;
+          transition: 0.1s ease-in-out;
+  width:  10px;
+}
+
+.learn-more-link-arrow.large {
+  background-size: 16px 16px;
+  height: 16px;
+  margin: 0 0 4px 5px;
+  width: 16px;
+}
+
+.learn-more-link-arrow.rotated {
+  -webkit-transform: rotate(90deg);
+     -moz-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
+/* Introduction Section Styling
+------------------------------------------------------------------------------*/
+.parallax-section {
+  border-bottom: 1px solid #ccc;
+  
+  min-height: 450px;
+  position: relative;
+  width: 100%;
+}
+
+.parallax-section.brdr-top { border-top: 1px solid #ccc; }
+
+.parallax-bg-pnl-wrapper {
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.parallax-bg-panel {
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  position: relative;
+  width: 130%;
+}
+
+.parallax-bg-panel.start-left { left: -30%; }
+.parallax-bg-panel.start-right { right: 0; }
+
+.tree-beach-pnl {
+  background-image: url('../img/banner/beach.jpg');
+  background-position: center center;
+}
+
+.fabric-pnl {
+  background-image: url('../img/banner/fabric.jpg');
+  background-position: right center;
+}
+
+.parallax-section-copy-wrapper {
+  margin: auto;
+  max-width: 1024px;
+  position: relative;
+  z-index: 10;
+}
+
+.parallax-section-copy-wrapper:after {
+  content: '.';
+  display: block;
+  height: 0;
+  visibility: hidden;
+  clear: both;
+}
+
+.parallax-section-copy { box-sizing: border-box; max-width: 400px; padding: 75px 40px 0 0; }
+.parallax-section-copy.right { float: right; }
+
+.section-copy h4 {
+  color: #557aff;
+  font-family: 'Open Sans Condensed', Helvetica, Arial, sans-serif;
+  font-size: 48px;
+  padding-bottom: 15px;
+}
+
+.section-copy p {
+  color: #333;
+  font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  line-height: 150%;
+  padding-bottom: 15px;
+}
+
+@media screen and (min-width: 781px) {
+  .section-copy.l-light p { color: #fff; }
+}
+
+@media screen and (max-width: 940px) {
+  .parallax-section { min-height: 375px; }
+  .parallax-section-copy { padding: 50px 10px; }
+  .section-copy h4 { font-size: 40px; }
+}
+
+@media screen and (max-width: 767px) {
+  .parallax-section {
+    min-height: 500px;
+  }
+  .parallax-bg-panel { border-bottom: 1px solid #bbb; height: 350px; }
+  .parallax-section-copy {
+    float: none;
+    max-width: 100%;
+    padding: 375px 10px 10px 10px;
+    text-align: center;
+  }
+  .section-copy h4 { text-align: center; }
+  .section-copy p { font-size: 16px; }
+}
+
+@media screen and (max-width: 480px) {
+  .parallax-section-copy { text-align: center; }
+}
+
+.product-section {
+  background: #fff;
+  max-height: 500px;
+  width: 100%;
+}
+
+.brdr-top { border-bottom: 1px solid #ccc; }
+
+.made-in-america-section-copy {
+  padding: 50px 0 0 10px;
+}
+
+.section-img {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  display: block;
+  padding: 25px 10px 25px 10px;
+  margin: auto;
+  max-height: 300px;
+}
+
+.section-img.relaxing-kids { padding: 40px 10px 40px 10px }
+
+@media screen and (max-width: 780px) {
+  .section-img {
+/*    width: 100%;*/
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .section-img {
+    display: block;
+    margin: auto;
+    padding: 25px 0 0 0;
+    width: 193px;
+  }
+
+  .made-in-america-section-copy {
+    padding: 5px 10px 0 10px;
+  }
+}
