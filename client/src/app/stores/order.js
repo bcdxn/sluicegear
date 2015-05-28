@@ -2,6 +2,7 @@ var Dispatcher     = require('../dispatcher'),
     assign         = require('object-assign'),
     EventEmitter   = require('events').EventEmitter,
     OrderConstants = require('../constants/order'),
+    $              = require('jquery'),
     _order         = {},
     OrderStore;
 

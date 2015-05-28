@@ -8,6 +8,7 @@ var Header       = require('./components/header'),
     Hero         = require('./components/hero'),
     Specs        = require('./components/specs'),
     Utils        = require('./utils'),
+    $            = require('jquery'),
     queryParams  = $.getQueryParameters();
 
 React.render(<Footer />, document.getElementById('footerContainer'));

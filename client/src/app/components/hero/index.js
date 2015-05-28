@@ -1,4 +1,7 @@
-var Hero = React.createClass({
+var $ = require('jquery'),
+    Hero ;
+
+Hero = React.createClass({
   getInitialState: function () {
     return {
       'heroHeight': window.innerHeight - $('#headerContainer').height(), // TODO: also add banner

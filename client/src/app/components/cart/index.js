@@ -3,7 +3,11 @@ var CartItemList  = require('./cart-item-list'),
     CartStore     = require('../../stores/cart'),
     CartActions   = require('../../actions/cart'),
     PaypalSpinner = require('../modal/paypal-spinner'),
-    Modal         = require('../modal');
+    Modal         = require('../modal'),
+    $             = require('jquery');
+
+//Cookies.json = true;
+//Cookies.set('test', 'ok', { expires: 7, path: '/' });
 
 var Cart = React.createClass({
   getDefaultProps: function () {
