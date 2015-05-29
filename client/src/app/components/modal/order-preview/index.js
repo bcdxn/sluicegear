@@ -3,7 +3,8 @@ var OrderPreviewList = require('./order-preview-list'),
     Modal            = require('../../modal'),
     PaypalSpinner    = require('../paypal-spinner'),
     $                = require('jquery'),
-    Cookie           = require('js-cookie'),
+    Cookies          = require('js-cookie'),
+    CartActions      = require('../../../actions/cart'),
     OrderPreview;
 
 OrderPreview = React.createClass({
@@ -19,6 +20,11 @@ OrderPreview = React.createClass({
   
   componentDidMount: function () {
     OrderStore.addChangeListener(this._onOrderChange);
+    this._slideIn();
+  },
+  
+  componentDidUpdate: function () {
+    this._slideIn();
   },
 
   componentWillUnmount: function () {
@@ -39,6 +45,12 @@ OrderPreview = React.createClass({
     React.unmountComponentAtNode(document.getElementById('modal'));
     $('html').removeClass('freeze-page-size');
     $('body').removeClass('freeze-page-size');
+  },
+  
+  _slideIn: function () {
+    window.requestAnimationFrame(function () {
+      $('.modal-middle').addClass('show-modal');
+    });
   },
   
   _onCompleteCheckout: function () {
@@ -69,6 +81,7 @@ OrderPreview = React.createClass({
     React.render(<Modal level='info' title={'Thank You!'} message={message} close={_closeModalHideHistory} />, document.getElementById('modal'));
     
     Cookies.remove('cartItemHistory', { path: '/' });
+    CartActions.emptyCart();
   },
   
   _onOrderError: function (err) {

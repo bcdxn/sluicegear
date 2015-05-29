@@ -1,6 +1,18 @@
-var PaypalSpinner;
+var $ = require('jquery'),
+    PaypalSpinner;
 
 PaypalSpinner = React.createClass({
+  _slideIn: function () {
+    window.requestAnimationFrame(function () {
+      $('.modal-middle').addClass('show-modal');
+    });
+  },
+  componentDidMount: function () {
+    this._slideIn();
+  },
+  componentDidUpdate: function () {
+    this._slideIn();
+  },
   render: function () {
     return (
       <div className='modal-wrapper'>

@@ -32,7 +32,10 @@ var Cart = React.createClass({
   },
   
   hideCart: function () {
-    CartActions.hideCart();
+    $('.shopping-cart').removeClass('show-shopping-cart');
+    setTimeout(function () {
+      CartActions.hideCart();
+    }, 100);
   },
 
   handleResize: function (e) {
@@ -47,6 +50,14 @@ var Cart = React.createClass({
   componentWillUnmount: function () {
     window.removeEventListener('resize', this.handleResize);
     CartStore.removeChangeListener(this._onCartChange);
+  },
+  
+  componentDidUpdate: function () {
+    if (this.state.isCartVisible) {
+      window.requestAnimationFrame(function() {
+        $('.shopping-cart').addClass('show-shopping-cart');
+      });
+    }
   },
   
   _onCartChange: function () {
@@ -99,8 +110,7 @@ var Cart = React.createClass({
         },
         cartClasses = classNames({
           'shopping-cart':       true,
-          'shopping-cart-empty': this.state.items.length < 1,
-          'show-shopping-cart':  this.state.isCartVisible
+          'shopping-cart-empty': this.state.items.length < 1
         }),
         checkoutBtnClasses = classNames({
           'btn': true, 'green': true, 'solid': true, 'right-btn': true,

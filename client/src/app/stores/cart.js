@@ -33,6 +33,13 @@ function _removeCartItem(id) {
 }
 
 /**
+ * Remove all items from the cart.
+ */
+function _emptyCart() {
+  _cartItems = [];
+}
+
+/**
  * Show the shopping cart.
  */
 function _showCart() {
@@ -43,7 +50,7 @@ function _showCart() {
  * Hide the shopping cart
  */
 function _hideCart(id) {
-  _isCartVisible = false;
+  _isCartVisible = false; 
 }
 
 CartStore = assign({}, EventEmitter.prototype, {
@@ -103,6 +110,11 @@ CartStore.dispatchToken = Dispatcher.register(function(action) {
       $('html').removeClass('freeze-page-size');
       $('body').removeClass('freeze-page-size');
       break
+    
+    case CartConstants.ActionTypes.EMPTY_CART:
+      _emptyCart();
+      CartStore.emitChange();
+      break;
     
     default:
       // no-op

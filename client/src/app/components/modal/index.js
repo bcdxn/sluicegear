@@ -1,6 +1,6 @@
 var classNames = require('classnames'),
     $          = require('jquery'),
-    ErrorModal;
+    Modal;
 
 function _close() {
   $('html').removeClass('freeze-page-size');
@@ -8,7 +8,7 @@ function _close() {
   React.unmountComponentAtNode(document.getElementById('modal'));
 }
 
-ErrorModal = React.createClass({
+Modal = React.createClass({
   getDefaultProps: function () {
     return {
       level:   'info',
@@ -16,6 +16,19 @@ ErrorModal = React.createClass({
       message: 'Something went wrong. Please try again.',
       close:   _close
     };
+  },
+  
+  componentDidMount: function () {
+    this._slideIn();
+  },
+  componentDidUpdate: function () {
+    this._slideIn();
+  },
+  
+  _slideIn: function () {
+    window.requestAnimationFrame(function () {
+      $('.modal-middle').addClass('show-modal');
+    });
   },
   
   render: function () {
@@ -45,4 +58,4 @@ ErrorModal = React.createClass({
   }
 });
 
-module.exports = ErrorModal;
+module.exports = Modal;

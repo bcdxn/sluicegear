@@ -19,10 +19,14 @@ var CartActions = {
     });
   },
   removeItem: function (itemId) {
-    console.log('id: ' + itemId)
     Dispatcher.dispatch({
       type: CartConstants.ActionTypes.REMOVE_ITEM,
       itemId: itemId
+    });
+  },
+  emptyCart: function () {
+    Dispatcher.dispatch({
+      type: CartConstants.ActionTypes.EMPTY_CART
     });
   }
 };
