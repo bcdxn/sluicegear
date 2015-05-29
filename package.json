@@ -16,6 +16,7 @@
     "jquery": "^2.1.4",
     "js-cookie": "^1.5.1",
     "keymirror": "^0.1.1",
+    "mandrill-api": "^1.0.45",
     "method-override": "2.3.2",
     "morgan": "^1.5.3",
     "object-assign": "^2.0.0",

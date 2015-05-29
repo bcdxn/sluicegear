@@ -130,8 +130,14 @@ PaypalApi.executePayment = function (paymentId, payerId) {
       }
       
       deferred.reject(retError);
-    } else {
-      deferred.resolve({});
+    } else {      
+      deferred.resolve({
+        'paymentId':   paymentId,
+        'createdTime': resp.create_time,
+        'state':       resp.state,
+        'payer':       resp.payer,
+        'transaction': resp.transactions[0].amount
+      });
     }
   });
 

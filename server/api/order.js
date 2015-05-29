@@ -3,7 +3,8 @@
 var Q         = require('q'),
     HttpCode  = require('../common/http-code'),
     Util      = require('../common/util'),
-    PayPalApi = require('./paypal');
+    PayPalApi = require('./paypal'),
+    Email     = require('./email');
 
 module.exports = function (server) {
   var OrderApi          = {},
@@ -251,7 +252,7 @@ module.exports = function (server) {
     
     Dao.Model.Order.find({
       'where':   { 'paymentId': paymentId },
-      'attributes': ['itemsTotalPrice', 'shippingPrice', 'salesTax', 'adjustment', 'paymentMethod', 'paymentId', 'CouponId'],
+      'attributes': ['itemsTotalPrice', 'shippingPrice', 'salesTax', 'adjustment', 'paymentMethod', 'paymentId', 'paymentReceived', 'CouponId'],
       'include': [{
           'model': Dao.Model.OrderItem,
           'attributes': ['personalization'],
@@ -296,11 +297,18 @@ module.exports = function (server) {
     
     OrderApi.read(paymentId).then(function (order) {
       if (order) {
-        PayPalApi.executePayment(paymentId, payerId).then(function () {
+        PayPalApi.executePayment(paymentId, payerId).then(function (paymentInfo) {
           Dao.Model.Order.update(
             { paymentReceived: true },
             { 'where': {'paymentId': paymentId } }
           ).then(function () {
+            var emailContent = paymentInfo;
+            // We know it's paid although when we grabbed it from the DB it was not
+            order.paymentReceived = true;
+            emailContent.cart = order;
+            emailContent.coupons = order.Coupon;
+            
+            Email.sendSellerNotification(emailContent);
             deferred.resolve(order);
           });
         }).catch(function (err) {

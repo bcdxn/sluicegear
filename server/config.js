@@ -32,6 +32,9 @@ Config.SLUICE_PP_PORT          = process.env.SLUICE_PP_PORT;
 Config.SLUICE_PP_CLIENT_ID     = process.env.SLUICE_PP_CLIENT_ID;
 Config.SLUICE_PP_CLIENT_SECRET = process.env.SLUICE_PP_CLIENT_SECRET;
 Config.SLUICE_PP_MODE          = process.env.SLUICE_PP_MODE || 'sandbox';
+// Mandrill Email Service Config
+Config.SLUICE_MANDRILL_API_KEY          = process.env.SLUICE_MANDRILL_API_KEY;
+Config.SLUICE_SELLER_NOTIFICATION_EMAIL = process.env.SLUICE_SELLER_NOTIFICATION_EMAIL;
 // DB Config
 Config.DB_USER    = process.env.DB_USER    || 'dev-user';
 Config.DB_PASS    = process.env.DB_PASS    || '';
