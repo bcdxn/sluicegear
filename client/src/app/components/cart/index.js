@@ -4,10 +4,8 @@ var CartItemList  = require('./cart-item-list'),
     CartActions   = require('../../actions/cart'),
     PaypalSpinner = require('../modal/paypal-spinner'),
     Modal         = require('../modal'),
+    Utils         = require('../../utils'),
     $             = require('jquery');
-
-//Cookies.json = true;
-//Cookies.set('test', 'ok', { expires: 7, path: '/' });
 
 var Cart = React.createClass({
   getDefaultProps: function () {
@@ -27,7 +25,7 @@ var Cart = React.createClass({
       'salesTax':   0,
       'adjustment': 0,
       'items':      CartStore.getAllItems(),
-      'coupon':     {}
+      'coupon':     CartStore.getCoupon()
     };
   },
   
@@ -61,7 +59,11 @@ var Cart = React.createClass({
   },
   
   _onCartChange: function () {
-    this.setState({ 'items': CartStore.getAllItems(), 'isCartVisible': CartStore.getIsCartVisible() });
+    this.setState({
+      'items':         CartStore.getAllItems(),
+      'isCartVisible': CartStore.getIsCartVisible(),
+      'coupon':        CartStore.getCoupon()
+    });
   },
   
   checkout: function () {
@@ -78,7 +80,7 @@ var Cart = React.createClass({
       
       order.items = this.state.items.slice(0);
       order.paymentMethod  = 'paypal';
-      order.coupon = {};
+      order.coupon = this.state.coupon;
       
       console.log(order.items);
       
@@ -104,6 +106,36 @@ var Cart = React.createClass({
     React.render(<Modal level='error' message={err.message} />, document.getElementById('modal'));
   },
   
+  _fetchCoupon: function () {
+    var code = $('.coupon-input').val(),
+        self = this;
+    
+    if (code) {
+      $.ajax({
+        type: 'GET',
+        url: '/api/Coupon?code=' + code
+      }).done(function (data) {
+        self._goodCoupon(data);
+      }).fail(function (err) {
+        self._badCoupon(err);
+      });
+    }
+  },
+  
+  _goodCoupon: function (data) {
+    $('.coupon-input').val('');
+    CartActions.addCoupon(data);
+  },
+  
+  _badCoupon: function (err) {
+    console.log(err);
+    this.setState({ 'badCoupon': true });
+  },
+  
+  _removeCoupon: function () {
+    CartActions.removeCoupon();
+  },
+  
   render: function () {
     var cartStyle = {
           height: this.state.cartHeight
@@ -119,15 +151,20 @@ var Cart = React.createClass({
         }),
         itemsLbl        = ((this.state.items.length === 1) ? ' item' : ' items'),
         itemsTotalPrice = 0,
-        shipping        = this.props.shippingPrice;
-        
-        this.state.items.forEach(function (item) {
-          itemsTotalPrice += item.price;
-        });
-        
-        if (itemsTotalPrice >= this.props.freeShippingMin) {
-          shipping = 0;
-        }
+        shipping        = this.props.shippingPrice,
+        couponCode      = ((this.state.coupon) ? this.state.coupon.code : ''),
+        adjustment      = 0,
+        self            = this;
+    
+    this.state.items.forEach(function (item) {
+      itemsTotalPrice += item.price;
+    });
+    
+    if (itemsTotalPrice >= this.props.freeShippingMin) {
+      shipping = 0;
+    }
+    
+    adjustment = Utils.getCouponAdjustment(itemsTotalPrice, this.props.shippingPrice, this.props.freeShippingMin, this.state.coupon);
 
     return (
       <div className={'shopping-cart-wrapper ' + ((this.state.isCartVisible) ? 'show-shopping-cart' : '')}>
@@ -149,11 +186,21 @@ var Cart = React.createClass({
                 <span className='cart-summary-lbl'>Shipping</span>
                 <span className='cart-summary-val'>${(shipping / 100).toFixed(2)}</span>
               </li>
-              <li className='shopping-cart-separator ptl pbl'><div className='inner'></div></li>
+              <li className='shopping-cart-separator ptl'><div className='inner'></div></li>
+              <li className={'cart-summary-line-item ptl pbl coupon-item ' + ((adjustment === 0) ? 'hide' : '')}
+                  onClick={this._removeCoupon.bind(self)} title='click to remove'>
+                <span className='cart-summary-lbl'>{couponCode} adjustment</span>
+                <span className='cart-summary-val'>${(adjustment / 100).toFixed(2)}</span>
+              </li>
+              <div className={'cart-summary-line-item ' + ((adjustment === 0) ? '' : 'hide')}>
+                <input type='text' className={'coupon-input ' + ((this.state.badCoupon) ? 'bad' : '')} placeholder='coupon code'/>
+                <button className='btn gray coupon-apply-btn' onClick={this._fetchCoupon.bind(self)}>Apply</button>
+              </div>
+              <li className='shopping-cart-separator pbl'><div className='inner'></div></li>
               <li className='cart-summary-line-item'>
                 <span className='cart-summary-lbl'>Total</span>
                 <span className='cart-summary-val'>
-                  ${((itemsTotalPrice + shipping + this.state.adjustment) / 100).toFixed(2)}
+                  ${((itemsTotalPrice + shipping + adjustment) / 100).toFixed(2)}
                 </span>
               </li>
             </ul>

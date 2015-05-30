@@ -24,6 +24,17 @@ var CartActions = {
       itemId: itemId
     });
   },
+  addCoupon: function (coupon) {
+    Dispatcher.dispatch({
+      type: CartConstants.ActionTypes.ADD_COUPON,
+      coupon: coupon
+    });
+  },
+  removeCoupon: function () {
+    Dispatcher.dispatch({
+      type: CartConstants.ActionTypes.REMOVE_COUPON
+    });
+  },
   emptyCart: function () {
     Dispatcher.dispatch({
       type: CartConstants.ActionTypes.EMPTY_CART

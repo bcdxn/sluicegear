@@ -24,7 +24,7 @@ var Utils = {
    * Generate the md5 hash of the straps so that we can
    * quickly map the straps to a sku.
    * 
-   * @param {String} [model]    Either 'standard' or 'auxillary' defaults to 'standard'
+   * @param {String} [model]  Either 'standard' or 'auxillary' defaults to 'standard'
    * @param {String} [color]  The color of the straps defaults to 'black'
    * @param {String} [length] The length of the straps defaults to '7 feet'
    */
@@ -37,6 +37,35 @@ var Utils = {
     attrVals[4] = length || '7 feet';
     
     return MD5(attrVals.join('|').toLowerCase());
+  },
+  
+  /**
+   * Calculate the adjustment due to a given coupon.
+   * 
+   * @param  {Number} itemsTotalPrice The total pricce of items pre tax, shipping
+   * @param  {Number} shippingPrice   The shipping price
+   * @param  {Number} freeShippingMin Limit at which free shipping kicks in
+   * @param  {Coupon} coupon          The coupon to be applied
+   * @return {Number}                 The adjustment
+   */
+  getCouponAdjustment: function (itemsTotalPrice, shippingPrice, freeShippingMin, coupon) {
+    var adjustment = 0;
+    
+    if (coupon) {
+      if (itemsTotalPrice >= coupon.minimumPrice && coupon.freeShipping && itemsTotalPrice < freeShippingMin){
+        adjustment = -1 * shippingPrice;
+      }
+      
+      if (itemsTotalPrice >= coupon.minimumPrice){
+        if (coupon.percentDiscount) {
+          adjustment = -1 * coupon.percentDiscount * itemsTotalPrice;
+        } else if (coupon.fixedDiscount) {
+          adjustment = -1 * coupon.fixedDiscount;
+        }
+      }
+    }
+    
+    return adjustment;
   },
   
   /**
