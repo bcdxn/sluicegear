@@ -8,19 +8,32 @@ var Sequelize = require('sequelize'),
 module.exports = function (server) {
   var deferred = Q.defer(),
       Dao   = {},
-      dbOpt = {};
+      dbOpt = {},
+      match;
   
-  /* Configure Database Options
+  /* Configure and Initialize Database Options
   ----------------------------------------------------------------------------*/
+  
   dbOpt.dialect = Config.DB_DIALECT;
   
-  if (dbOpt.dialect == 'sqlite') {
-    dbOpt.storage  = Config.DB_STORAGE;
+  if (process.env.DATABASE_URL) {
+    console.log('Using Heroku Postgres');
+    match = process.env.DATABASE_URL.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/);
+
+    Dao.DB = new Sequelize(match[5], match[1], match[2], {
+      dialect:  'postgres',
+      protocol: 'postgres',
+      host:     match[3],
+      port:     match[4],
+      pool:     { maxConnections: 20, maxIdleTime: 30 },
+      logging:  false,
+      native:   true
+    });
+  } else {
+    console.log('Using sqlite');
+    dbOpt.storage = Config.DB_STORAGE;
+    Dao.DB = new Sequelize(null, Config.DB_USER, Config.DB_PASS, dbOpt);
   }
-  
-  /* Initialize Sequelize DB
-  ----------------------------------------------------------------------------*/
-  Dao.DB = new Sequelize(null, Config.DB_USER, Config.DB_PASS, dbOpt);
   
   /* Configure Database Options
   ----------------------------------------------------------------------------*/
