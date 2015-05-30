@@ -70,8 +70,7 @@ Hero = React.createClass({
           <div className='banner-copy'>
             <div className='banner-copy-inner'>
               <h1>Sluice Hammocks</h1>
-              <h2>Create your fun</h2>
-              <h2 className='small'>Personalized hammocks made in the USA</h2>
+              <h2>Handcrafted Relaxation from NC</h2>
               <button className='btn green solid shadow hero-btn' onClick={this._onShopClick}>Shop now</button>
             </div>
           </div>
