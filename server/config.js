@@ -64,7 +64,8 @@ Config.initServer = function (server) {
           'resave': true,
           'saveUninitialized': true,
           'secret': Config.SESSION_SECRET
-        }));
+        }))
+        .use(morgan('tiny'));
 };
 
 module.exports = Config;
