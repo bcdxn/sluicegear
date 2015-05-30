@@ -9,8 +9,8 @@ var Q         = require('q'),
 module.exports = function (server) {
   var OrderApi          = {},
       Dao               = server.get('Dao'),
-      SHIPPING_PRICE    = 1000,
-      FREE_SHIPPING_MIN = 20000;
+      SHIPPING_PRICE    = 895,
+      FREE_SHIPPING_MIN = 15000;
   
   Dao.Model.Picklist.find({
     'where': {
@@ -21,6 +21,8 @@ module.exports = function (server) {
   }).then(function (shippingPrice) {
     if  (shippingPrice) {
       SHIPPING_PRICE = parseInt(shippingPrice.value);
+    } else {
+      console.log('WARNING: shipping price not found in DB, using the default ' + SHIPPING_PRICE);
     }
   });
   
@@ -33,6 +35,8 @@ module.exports = function (server) {
   }).then(function (shippingMin) {
     if  (shippingMin) {
       FREE_SHIPPING_MIN = parseInt(shippingMin.value);
+    } else {
+      console.log('WARNING: free shipping minimum not found in DB, using the default ' + FREE_SHIPPING_MIN);
     }
   });
   

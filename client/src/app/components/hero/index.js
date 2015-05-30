@@ -3,7 +3,6 @@ var $ = require('jquery'),
 
 Hero = React.createClass({
   getInitialState: function () {
-    console.log($('.header-wrapper').height() + ' -- ' + $('.learn-more-banner').height())
     return {
       'heroHeight': window.innerHeight - $('.header-wrapper').outerHeight() - $('.learn-more-banner').outerHeight(),
       'activeSlide': 0,
