@@ -4,6 +4,21 @@ var path           = require('path'),
     Mandrill       = new MandrillApi.Mandrill(Config.SLUICE_MANDRILL_API_KEY),
     EmailApi       = {};
 
+/**
+ * Send an email to the address configured as the sales notification endpoint.
+ * 
+ * ```
+ * {
+ *  "paymentId": "...",
+ *  "transaction": {},  // @see https://developer.paypal.com/docs/api/#execute-an-approved-paypal-payment
+ *  "payer": {},        // @see https://developer.paypal.com/docs/api/#execute-an-approved-paypal-payment
+ *  "cart": {},
+ *  "coupons": {}
+ * }
+ * ```
+ * 
+ * @param {Object} content The content of the email.
+ */
 EmailApi.sendSellerNotification = function (content) {
   var msg     = getDefaultMessage(),
       options = {},

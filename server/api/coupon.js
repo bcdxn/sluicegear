@@ -34,7 +34,6 @@ module.exports = function (server) {
     }).then(function (coupon) {
       deferred.resolve(coupon);
     }).catch(function (err) {
-      // TODO: HANDLE ERROR
       console.log(err);
       deferred.reject({
         code:    HttpCode.InternalServerError.CODE,

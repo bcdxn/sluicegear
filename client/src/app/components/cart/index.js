@@ -82,8 +82,6 @@ var Cart = React.createClass({
       order.paymentMethod  = 'paypal';
       order.coupon = this.state.coupon;
       
-      console.log(order.items);
-      
       $.ajax({
         type:'POST',
         url: '/api/Order',

@@ -33,7 +33,6 @@ module.exports = function (server) {
       
       deferred.resolve(plainPicklist);
     }).catch(function (err) {
-      // TODO: HANDLE ERROR
       console.log(err);
       deferred.reject({
         code:    HttpCode.InternalServerError.CODE,

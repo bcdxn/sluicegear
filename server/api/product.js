@@ -62,7 +62,6 @@ module.exports = function (server) {
       
       deferred.resolve(plainProducts);
     }).catch(function (err) {
-      // TODO: HANDLE ERROR
       console.log(err);
       deferred.reject({
         code:    HttpCode.InternalServerError.CODE,

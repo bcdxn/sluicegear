@@ -18,13 +18,15 @@ paypal.configure({
  * API call.
  * 
  * Example transaction details object:
+ * ```
  * {
- *   "subtotal":    0.00,
- *   "tax":         0.00,
- *   "shipping":    0.00,
- *   "total":       0.00,
+ *   "subtotal":    "0.00",
+ *   "tax":         "0.00",
+ *   "shipping":    "0.00",
+ *   "total":       "0.00",
  *   "description": "..."
  * }
+ * ```
  * 
  * @param  {Object}                  details The transaction details
  * @return {Promise<PayPalPayment>}          The PayPal API payment object
@@ -72,7 +74,6 @@ PaypalApi.createPayment = function (details) {
         i;
 
     if (err) {
-      // TODO: HANDLE ERROR
       console.log(err);
       deferred.reject(retError);
     } else {
@@ -117,7 +118,6 @@ PaypalApi.executePayment = function (paymentId, payerId) {
     var retError = {};
 
     if (err) {
-      // Log the error
       console.log(err);
       if (err.response.name === 'PAYMENT_STATE_INVALID') {
         retError.code    = HttpCode.BadRequest.CODE;

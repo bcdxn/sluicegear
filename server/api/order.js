@@ -177,6 +177,8 @@ module.exports = function (server) {
             order.adjustment = -1 * coupon.fixedDiscount;
           }
         }
+        // Link coupon to the order record via coupon id
+        order.CouponId = coupon.id;
       }
       
       PayPalApi.createPayment({
@@ -207,14 +209,12 @@ module.exports = function (server) {
               
               deferred.resolve(plainOrder);
             }).catch(function (err) {
-              // TODO: HANDLE ERROR
               console.log(err);
               deferred.reject({
                 code: HttpCode.InternalServerError.CODE,
                 message: 'Unable to update order with PayPayl paymentId'
               });
             });
-            
           }).catch(function (err) {
             console.log(err);
             deferred.reject({
@@ -224,7 +224,6 @@ module.exports = function (server) {
           });
         });
       }).catch(function (err) {
-        // TODO: HANDLE ERROR
         console.log(err);
         deferred.reject({
           code: HttpCode.InternalServerError.CODE,
@@ -247,8 +246,6 @@ module.exports = function (server) {
    */
   OrderApi.read = function (paymentId) {
     var deferred = Q.defer();
-    
-    console.log(paymentId)
     
     Dao.Model.Order.find({
       'where':   { 'paymentId': paymentId },
@@ -313,7 +310,6 @@ module.exports = function (server) {
           });
         }).catch(function (err) {
           if (!err.code) {
-            // TODO: HANDLE ERROR
             console.log(err);
             deferred.reject({
               code: HttpCode.InternalServerError.CODE,
@@ -330,9 +326,7 @@ module.exports = function (server) {
         });
       }
     }).catch(function (err) {
-      console.log('outer catch')
       if (!err.code) {
-        // TODO: HANDLE ERROR
         console.log(err);
         deferred.reject({
           code: HttpCode.InternalServerError.CODE,
