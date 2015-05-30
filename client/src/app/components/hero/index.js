@@ -3,8 +3,9 @@ var $ = require('jquery'),
 
 Hero = React.createClass({
   getInitialState: function () {
+    console.log($('.header-wrapper').height() + ' -- ' + $('.learn-more-banner').height())
     return {
-      'heroHeight': window.innerHeight - $('#headerContainer').height(), // TODO: also add banner
+      'heroHeight': window.innerHeight - $('.header-wrapper').outerHeight() - $('.learn-more-banner').outerHeight(),
       'activeSlide': 0,
       'timeoutId': null
     };
@@ -12,7 +13,7 @@ Hero = React.createClass({
   
   _onResize: function (e) {
     this.setState({
-      'heroHeight': window.innerHeight - $('#headerContainer').height() // TODO: also add banner
+      'heroHeight': window.innerHeight - $('.header-wrapper').outerHeight() - $('.learn-more-banner').outerHeight()
     });
   },
 
