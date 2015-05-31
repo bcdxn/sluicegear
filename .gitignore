@@ -2,8 +2,8 @@
 **/typings/
 **/tsd.json
 
-# NPM Modules
-**/node_modules/
+# NPM Modules -- We need NPM modules installed for heroku
+# **/node_modules/
 
 # Dev Sqlite database and Seeding scripts
 **/database/
