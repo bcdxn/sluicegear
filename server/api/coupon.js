@@ -24,7 +24,7 @@ module.exports = function (server) {
       });
       return deferred.promise;
     } else {
-      query.code = code;
+      query.code = code.toUpperCase();
     }
     
     Dao.Model.Coupon.find({

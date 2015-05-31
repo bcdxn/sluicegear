@@ -10,9 +10,9 @@ var classNames          = require('classnames'),
 CustomizerCtrls = React.createClass({
   getDefaultProps: function () {
     return {
-      'singleDescription': 'Get the comfort you deserve. Single color hammock: 9.5ft long, 4.5ft wide.',
-      'doubleDescription': 'The Double makes sharing easy. Double color hammock: 9.5ft long, 7.5ft wide.',
-      'hammieDescription': 'Because kids like hammocks, too! Single color hammock for kids: 6ft long, 4.5ft wide'
+      'singleDescription': 'Get the comfort you deserve. Single color hammock: 9.5ft long, 4.5ft wide. Stuff sack and two carabiners included with hammock.',
+      'doubleDescription': 'The Double makes sharing easy. Double color hammock: 9.5ft long, 7.5ft wide. Stuff sack and two carabiners included with hammock.',
+      'hammieDescription': 'Because kids like hammocks, too! Single color hammock for kids: 6ft long, 4.5ft wide.  Stuff sack and two carabiners included with hammock.'
     };
   },
   setHammockModel: function (model) {
