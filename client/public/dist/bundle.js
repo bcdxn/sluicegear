@@ -2195,10 +2195,10 @@ var Utils = {
       }
       
       if (itemsTotalPrice >= coupon.minimumPrice){
-        if (coupon.percentDiscount) {
-          adjustment = -1 * coupon.percentDiscount * itemsTotalPrice;
-        } else if (coupon.fixedDiscount) {
+        if (coupon.fixedDiscount) {
           adjustment = -1 * coupon.fixedDiscount;
+        } else if (coupon.percentDiscount) {
+          adjustment = -1 * coupon.percentDiscount * itemsTotalPrice;
         }
       }
     }
