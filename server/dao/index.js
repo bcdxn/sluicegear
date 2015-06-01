@@ -26,8 +26,7 @@ module.exports = function (server) {
       host:     match[3],
       port:     match[4],
       pool:     { maxConnections: 20, maxIdleTime: 30 },
-      logging:  false,
-      native:   true
+      logging:  false
     });
   } else {
     console.log('Using sqlite');
