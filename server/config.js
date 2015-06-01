@@ -25,7 +25,7 @@ Config.LOGGER_MODE     = process.env.LOGGER_MODE     || Config.NODE_ENV;
 Config.STATIC_DIR      = process.env.STATIC_DIR      || path.join('..', 'client', 'public');
 Config.CACHE_TIME      =  process.env.CACHE_TIME     || ((process.env.NODE_ENV === 'production') ? 86400000 : 1);
 Config.SESSION_SECRET  = process.env.SESSION_SECRET  || '0123456789qwerty';
-Config.SLUICE_ROOT_URL = process.env.SLUICE_ROOT_URL || 'http://192.168.1.70';//'http://localhost';
+Config.SLUICE_ROOT_URL = process.env.SLUICE_ROOT_URL || 'http://localhost';
 // PayPal Config
 Config.SLUICE_PP_HOST          = process.env.SLUICE_PP_HOST;
 Config.SLUICE_PP_PORT          = process.env.SLUICE_PP_PORT;
