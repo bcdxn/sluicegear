@@ -175,10 +175,10 @@ module.exports = function (server) {
         }
         
         if (order.itemsTotalPrice >= coupon.minimumPrice){
-          if (coupon.percentDiscount) {
-            order.adjustment = -1 * coupon.percentDiscount * order.itemsTotalPrice;
-          } else if (coupon.fixedDiscount) {
+          if (coupon.fixedDiscount) {
             order.adjustment = -1 * coupon.fixedDiscount;
+          } else if (coupon.percentDiscount) {
+            order.adjustment = -1 * coupon.percentDiscount * order.itemsTotalPrice;
           }
         }
         // Link coupon to the order record via coupon id
