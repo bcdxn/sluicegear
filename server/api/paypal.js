@@ -65,6 +65,9 @@ PaypalApi.createPayment = function (details) {
   // Add canceled callback url to the request body
   paypalPayment.redirect_urls.cancel_url = process.env.SLUICE_ROOT_URL + port + '/';
   
+console.log(JSON.stringify(paypalPayment, null, '\t'));
+
+
   // Create payment with paypal API
   paypal.payment.create(paypalPayment, {}, function (err, resp) {
     var paymentId,
@@ -74,7 +77,7 @@ PaypalApi.createPayment = function (details) {
         i;
 
     if (err) {
-      console.log(err);
+      console.log(JSON.stringify(err, null, '\t'));
       deferred.reject(retError);
     } else {
       paymentId = resp.id;
