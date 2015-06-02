@@ -52,10 +52,6 @@ var Utils = {
     var adjustment = 0;
     
     if (coupon) {
-      if (itemsTotalPrice >= coupon.minimumPrice && coupon.freeShipping && itemsTotalPrice < freeShippingMin){
-        adjustment = -1 * shippingPrice;
-      }
-      
       if (itemsTotalPrice >= coupon.minimumPrice){
         if (coupon.fixedDiscount) {
           adjustment = -1 * coupon.fixedDiscount;
