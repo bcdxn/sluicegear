@@ -162,7 +162,13 @@ var Cart = React.createClass({
       shipping = 0;
     }
     
+    // Get coupon adjustment
     adjustment = Utils.getCouponAdjustment(itemsTotalPrice, this.props.shippingPrice, this.props.freeShippingMin, this.state.coupon);
+    // Check for free shipping on coupon
+    if (this.state.coupon && itemsTotalPrice >= this.state.coupon.minimumPrice &&
+        this.state.coupon.freeShipping && itemsTotalPrice < this.props.freeShippingMin){
+      shipping = 0;
+    }
 
     return (
       <div className={'shopping-cart-wrapper ' + ((this.state.isCartVisible) ? 'show-shopping-cart' : '')}>
