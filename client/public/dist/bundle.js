@@ -358,7 +358,13 @@ var Cart = React.createClass({displayName: "Cart",
       shipping = 0;
     }
     
+    // Get coupon adjustment
     adjustment = Utils.getCouponAdjustment(itemsTotalPrice, this.props.shippingPrice, this.props.freeShippingMin, this.state.coupon);
+    // Check for free shipping on coupon
+    if (this.state.coupon && itemsTotalPrice >= this.state.coupon.minimumPrice &&
+        this.state.coupon.freeShipping && itemsTotalPrice < this.props.freeShippingMin){
+      shipping = 0;
+    }
 
     return (
       React.createElement("div", {className: 'shopping-cart-wrapper ' + ((this.state.isCartVisible) ? 'show-shopping-cart' : '')}, 
@@ -2190,10 +2196,6 @@ var Utils = {
     var adjustment = 0;
     
     if (coupon) {
-      if (itemsTotalPrice >= coupon.minimumPrice && coupon.freeShipping && itemsTotalPrice < freeShippingMin){
-        adjustment = -1 * shippingPrice;
-      }
-      
       if (itemsTotalPrice >= coupon.minimumPrice){
         if (coupon.fixedDiscount) {
           adjustment = -1 * coupon.fixedDiscount;
