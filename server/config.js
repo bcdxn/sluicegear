@@ -65,7 +65,7 @@ Config.initServer = function (server) {
           'saveUninitialized': true,
           'secret': Config.SESSION_SECRET
         }))
-        .use(morgan('tiny'));
+        .use(morgan([':date',':status',':remote-addr',':method',':url',':response-time'].join(' | ')));
 };
 
 module.exports = Config;
