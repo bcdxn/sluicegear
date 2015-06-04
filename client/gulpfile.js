@@ -11,7 +11,6 @@ var gulp        = require('gulp'),
     rename      = require('gulp-rename');
 
 var path = {
-  HTML:           './src/index.html',
   CSS:            './src/app/**/*.css',
   JS:             './src/app/**/*.js',
   JS_ENTRY_POINT: './src/app/app.js',
@@ -21,13 +20,6 @@ var path = {
   OUT_CSS_MIN:   'bundle.min.css',
   OUT_JS_MIN:    'bundle.min.js',
 };
-
-// Copy over index.html to dist
-gulp.task('html', function(){
-  gulp.src(path.HTML)
-      .pipe(gulp.dest(path.DIST));
-  console.log('----HTML UPDATED----');
-});
 
 // Concat and minify CSS
 gulp.task('css', function () {
