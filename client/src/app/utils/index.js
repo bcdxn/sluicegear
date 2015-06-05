@@ -56,7 +56,7 @@ var Utils = {
         if (coupon.fixedDiscount && coupon.fixedDiscount > 0) {
           adjustment = -1 * coupon.fixedDiscount;
         } else if (coupon.percentDiscount && coupon.percentDiscount > 0) {
-          adjustment = -1 * coupon.percentDiscount * itemsTotalPrice;
+          adjustment = parseFloat((-1 * coupon.percentDiscount * itemsTotalPrice).toFixed(2));
         }
       }
     }
