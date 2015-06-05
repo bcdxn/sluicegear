@@ -178,7 +178,7 @@ module.exports = function (server) {
           if (coupon.fixedDiscount && coupon.fixedDiscount > 0) {
             order.adjustment = -1 * coupon.fixedDiscount;
           } else if (coupon.percentDiscount && coupon.percentDiscount > 0) {
-            order.adjustment = -1 * coupon.percentDiscount * order.itemsTotalPrice;
+            order.adjustment = parseFloat((-1 * coupon.percentDiscount * order.itemsTotalPrice).toFixed(2));
           }
         }
         // Link coupon to the order record via coupon id
