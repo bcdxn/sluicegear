@@ -53,9 +53,9 @@ var Utils = {
     
     if (coupon) {
       if (itemsTotalPrice >= coupon.minimumPrice){
-        if (coupon.fixedDiscount) {
+        if (coupon.fixedDiscount && coupon.fixedDiscount > 0) {
           adjustment = -1 * coupon.fixedDiscount;
-        } else if (coupon.percentDiscount) {
+        } else if (coupon.percentDiscount && coupon.percentDiscount > 0) {
           adjustment = -1 * coupon.percentDiscount * itemsTotalPrice;
         }
       }
