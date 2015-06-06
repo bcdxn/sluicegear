@@ -50,11 +50,6 @@ gulp.task('js', function() {
   }
 });
 
-// Watch changes to HTML
-gulp.task('watchHtml', function () {
-  gulp.watch(path.HTML, ['html']);
-});
-
 // Watch changes to CSS
 gulp.task('watchCss', function () {
   gulp.watch(path.CSS, ['css']);
@@ -66,4 +61,4 @@ gulp.task('watchJs', function () {
 });                               
 
 // Default tasks
-gulp.task('default', ['js', 'css', 'html', 'watchJs', 'watchCss', 'watchHtml']);
+gulp.task('default', ['js', 'css', 'watchJs', 'watchCss']);
