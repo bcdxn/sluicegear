@@ -563,22 +563,19 @@ CustomizerCtrls = React.createClass({displayName: "CustomizerCtrls",
         ), 
         
         React.createElement("div", {className: 'row ptm pbl primary-color-choices ' + this.props.primaryColor.toLowerCase()}, 
-          React.createElement("div", {className: "col-xs-2 builder-ctrls-fabric-btn prs"}, 
+          React.createElement("div", {className: "col-xs-20p builder-ctrls-fabric-btn prs"}, 
             React.createElement("div", {className: "red-fabric fabric-btn-inner", onClick: this.setPrimaryColor.bind(self, CustomizerConstants.Colors.RED)})
           ), 
-          React.createElement("div", {className: "col-xs-2 builder-ctrls-fabric-btn prs"}, 
+          React.createElement("div", {className: "col-xs-20p builder-ctrls-fabric-btn prs"}, 
             React.createElement("div", {className: "blue-fabric fabric-btn-inner", onClick: this.setPrimaryColor.bind(self, CustomizerConstants.Colors.BLUE)})
           ), 
-          React.createElement("div", {className: "col-xs-2 builder-ctrls-fabric-btn prs"}, 
+          React.createElement("div", {className: "col-xs-20p builder-ctrls-fabric-btn prs"}, 
             React.createElement("div", {className: "tan-fabric fabric-btn-inner", onClick: this.setPrimaryColor.bind(self, CustomizerConstants.Colors.TAN)})
           ), 
-          React.createElement("div", {className: "col-xs-2 builder-ctrls-fabric-btn prs"}, 
+          React.createElement("div", {className: "col-xs-20p builder-ctrls-fabric-btn prs"}, 
             React.createElement("div", {className: "burgundy-fabric fabric-btn-inner", onClick: this.setPrimaryColor.bind(self, CustomizerConstants.Colors.BURGUNDY)})
           ), 
-          React.createElement("div", {className: "col-xs-2 builder-ctrls-fabric-btn prs"}, 
-            React.createElement("div", {className: "turquoise-fabric fabric-btn-inner", onClick: this.setPrimaryColor.bind(self, CustomizerConstants.Colors.TURQUOISE)})
-          ), 
-          React.createElement("div", {className: "col-xs-2 builder-ctrls-fabric-btn prs"}, 
+          React.createElement("div", {className: "col-xs-20p builder-ctrls-fabric-btn prs"}, 
             React.createElement("div", {className: "black-fabric fabric-btn-inner", onClick: this.setPrimaryColor.bind(self, CustomizerConstants.Colors.BLACK)})
           )
         ), 
@@ -589,22 +586,19 @@ CustomizerCtrls = React.createClass({displayName: "CustomizerCtrls",
           ), 
           
           React.createElement("div", {className: 'ptm secondary-color-choices ' + secondaryColor}, 
-            React.createElement("div", {className: "col-xs-2 builder-ctrls-fabric-btn prs"}, 
+            React.createElement("div", {className: "col-xs-20p builder-ctrls-fabric-btn prs"}, 
               React.createElement("div", {className: "red-fabric fabric-btn-inner", onClick: this.setSecondaryColor.bind(self, CustomizerConstants.Colors.RED)})
             ), 
-            React.createElement("div", {className: "col-xs-2 builder-ctrls-fabric-btn prs"}, 
+            React.createElement("div", {className: "col-xs-20p builder-ctrls-fabric-btn prs"}, 
               React.createElement("div", {className: "blue-fabric fabric-btn-inner", onClick: this.setSecondaryColor.bind(self, CustomizerConstants.Colors.BLUE)})
             ), 
-            React.createElement("div", {className: "col-xs-2 builder-ctrls-fabric-btn prs"}, 
+            React.createElement("div", {className: "col-xs-20p builder-ctrls-fabric-btn prs"}, 
               React.createElement("div", {className: "tan-fabric fabric-btn-inner", onClick: this.setSecondaryColor.bind(self, CustomizerConstants.Colors.TAN)})
             ), 
-            React.createElement("div", {className: "col-xs-2 builder-ctrls-fabric-btn prs"}, 
+            React.createElement("div", {className: "col-xs-20p builder-ctrls-fabric-btn prs"}, 
               React.createElement("div", {className: "burgundy-fabric fabric-btn-inner", onClick: this.setSecondaryColor.bind(self, CustomizerConstants.Colors.BURGUNDY)})
             ), 
-            React.createElement("div", {className: "col-xs-2 builder-ctrls-fabric-btn prs"}, 
-              React.createElement("div", {className: "turquoise-fabric fabric-btn-inner", onClick: this.setSecondaryColor.bind(self, CustomizerConstants.Colors.TURQUOISE)})
-            ), 
-            React.createElement("div", {className: "col-xs-2 builder-ctrls-fabric-btn prs"}, 
+            React.createElement("div", {className: "col-xs-20p builder-ctrls-fabric-btn prs"}, 
               React.createElement("div", {className: "black-fabric fabric-btn-inner", onClick: this.setSecondaryColor.bind(self, CustomizerConstants.Colors.BLACK)})
             )
           )
