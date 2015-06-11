@@ -15,7 +15,7 @@ var path           = require('path'),
 --------------------------------------------------------------------------------*/
 
 // App Versioning
-Config.VERSION = '3.0.3';
+Config.VERSION = '3.0.4';
 // App Server Config
 Config.PORT            = process.env.PORT            || 1337;
 Config.VIEW_DIR        = process.env.VIEW_DIR        || 'views';
