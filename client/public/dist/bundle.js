@@ -40,6 +40,15 @@ $(document).ready(function () {
   }
 });
 
+//  Google Analytics
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-52244108-1', 'auto');
+ga('send', 'pageview');
+
 },{"./actions/order":4,"./components/cart":7,"./components/customizer":11,"./components/footer":12,"./components/header":13,"./components/hero":14,"./components/modal/order-preview":16,"./components/product-list":20,"./components/specs":22,"./utils":31,"jquery":44}],2:[function(require,module,exports){
 var Dispatcher    = require('../dispatcher'),
     CartConstants = require('../constants/cart');
