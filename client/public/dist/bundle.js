@@ -40,6 +40,15 @@ $(document).ready(function () {
   }
 });
 
+//  Google Analytics
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-52244108-1', 'auto');
+ga('send', 'pageview');
+
 },{"./actions/order":4,"./components/cart":7,"./components/customizer":11,"./components/footer":12,"./components/header":13,"./components/hero":14,"./components/modal/order-preview":16,"./components/product-list":20,"./components/specs":22,"./utils":31,"jquery":44}],2:[function(require,module,exports){
 var Dispatcher    = require('../dispatcher'),
     CartConstants = require('../constants/cart');
@@ -563,22 +572,19 @@ CustomizerCtrls = React.createClass({displayName: "CustomizerCtrls",
         ), 
         
         React.createElement("div", {className: 'row ptm pbl primary-color-choices ' + this.props.primaryColor.toLowerCase()}, 
-          React.createElement("div", {className: "col-xs-2 builder-ctrls-fabric-btn prs"}, 
+          React.createElement("div", {className: "col-xs-20p builder-ctrls-fabric-btn prs"}, 
             React.createElement("div", {className: "red-fabric fabric-btn-inner", onClick: this.setPrimaryColor.bind(self, CustomizerConstants.Colors.RED)})
           ), 
-          React.createElement("div", {className: "col-xs-2 builder-ctrls-fabric-btn prs"}, 
+          React.createElement("div", {className: "col-xs-20p builder-ctrls-fabric-btn prs"}, 
             React.createElement("div", {className: "blue-fabric fabric-btn-inner", onClick: this.setPrimaryColor.bind(self, CustomizerConstants.Colors.BLUE)})
           ), 
-          React.createElement("div", {className: "col-xs-2 builder-ctrls-fabric-btn prs"}, 
+          React.createElement("div", {className: "col-xs-20p builder-ctrls-fabric-btn prs"}, 
             React.createElement("div", {className: "tan-fabric fabric-btn-inner", onClick: this.setPrimaryColor.bind(self, CustomizerConstants.Colors.TAN)})
           ), 
-          React.createElement("div", {className: "col-xs-2 builder-ctrls-fabric-btn prs"}, 
+          React.createElement("div", {className: "col-xs-20p builder-ctrls-fabric-btn prs"}, 
             React.createElement("div", {className: "burgundy-fabric fabric-btn-inner", onClick: this.setPrimaryColor.bind(self, CustomizerConstants.Colors.BURGUNDY)})
           ), 
-          React.createElement("div", {className: "col-xs-2 builder-ctrls-fabric-btn prs"}, 
-            React.createElement("div", {className: "turquoise-fabric fabric-btn-inner", onClick: this.setPrimaryColor.bind(self, CustomizerConstants.Colors.TURQUOISE)})
-          ), 
-          React.createElement("div", {className: "col-xs-2 builder-ctrls-fabric-btn prs"}, 
+          React.createElement("div", {className: "col-xs-20p builder-ctrls-fabric-btn prs"}, 
             React.createElement("div", {className: "black-fabric fabric-btn-inner", onClick: this.setPrimaryColor.bind(self, CustomizerConstants.Colors.BLACK)})
           )
         ), 
@@ -589,22 +595,19 @@ CustomizerCtrls = React.createClass({displayName: "CustomizerCtrls",
           ), 
           
           React.createElement("div", {className: 'ptm secondary-color-choices ' + secondaryColor}, 
-            React.createElement("div", {className: "col-xs-2 builder-ctrls-fabric-btn prs"}, 
+            React.createElement("div", {className: "col-xs-20p builder-ctrls-fabric-btn prs"}, 
               React.createElement("div", {className: "red-fabric fabric-btn-inner", onClick: this.setSecondaryColor.bind(self, CustomizerConstants.Colors.RED)})
             ), 
-            React.createElement("div", {className: "col-xs-2 builder-ctrls-fabric-btn prs"}, 
+            React.createElement("div", {className: "col-xs-20p builder-ctrls-fabric-btn prs"}, 
               React.createElement("div", {className: "blue-fabric fabric-btn-inner", onClick: this.setSecondaryColor.bind(self, CustomizerConstants.Colors.BLUE)})
             ), 
-            React.createElement("div", {className: "col-xs-2 builder-ctrls-fabric-btn prs"}, 
+            React.createElement("div", {className: "col-xs-20p builder-ctrls-fabric-btn prs"}, 
               React.createElement("div", {className: "tan-fabric fabric-btn-inner", onClick: this.setSecondaryColor.bind(self, CustomizerConstants.Colors.TAN)})
             ), 
-            React.createElement("div", {className: "col-xs-2 builder-ctrls-fabric-btn prs"}, 
+            React.createElement("div", {className: "col-xs-20p builder-ctrls-fabric-btn prs"}, 
               React.createElement("div", {className: "burgundy-fabric fabric-btn-inner", onClick: this.setSecondaryColor.bind(self, CustomizerConstants.Colors.BURGUNDY)})
             ), 
-            React.createElement("div", {className: "col-xs-2 builder-ctrls-fabric-btn prs"}, 
-              React.createElement("div", {className: "turquoise-fabric fabric-btn-inner", onClick: this.setSecondaryColor.bind(self, CustomizerConstants.Colors.TURQUOISE)})
-            ), 
-            React.createElement("div", {className: "col-xs-2 builder-ctrls-fabric-btn prs"}, 
+            React.createElement("div", {className: "col-xs-20p builder-ctrls-fabric-btn prs"}, 
               React.createElement("div", {className: "black-fabric fabric-btn-inner", onClick: this.setSecondaryColor.bind(self, CustomizerConstants.Colors.BLACK)})
             )
           )
@@ -2197,10 +2200,10 @@ var Utils = {
     
     if (coupon) {
       if (itemsTotalPrice >= coupon.minimumPrice){
-        if (coupon.fixedDiscount) {
+        if (coupon.fixedDiscount && coupon.fixedDiscount > 0) {
           adjustment = -1 * coupon.fixedDiscount;
-        } else if (coupon.percentDiscount) {
-          adjustment = -1 * coupon.percentDiscount * itemsTotalPrice;
+        } else if (coupon.percentDiscount && coupon.percentDiscount > 0) {
+          adjustment = Math.round(parseFloat((-1 * coupon.percentDiscount * itemsTotalPrice).toFixed(2)));
         }
       }
     }

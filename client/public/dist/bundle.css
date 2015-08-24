@@ -2660,6 +2660,40 @@ section.slide.beach { background-image: url('../img/hero/beach-bg.jpg'); }
   font-size: 26px;
   width: 100%;
 }
+
+/* Custom Boostrap 5-col layout */
+.col-xs-20p,
+.col-sm-20p,
+.col-md-20p,
+.col-lg-20p {
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.col-xs-20p {
+    width: 20%;
+    float: left;
+}
+@media (min-width: 768px) {
+.col-sm-20p {
+        width: 20%;
+        float: left;
+    }
+}
+@media (min-width: 992px) {
+    .col-md-20p {
+        width: 20%;
+        float: left;
+    }
+}
+@media (min-width: 1200px) {
+    .col-lg-20p {
+        width: 20%;
+        float: left;
+    }
+}
 .builder-preview {
   font-family: 'Open Sans Condensed', Helvetica, Arial, sans-serif;
 }
