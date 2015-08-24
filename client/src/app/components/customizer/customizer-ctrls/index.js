@@ -117,22 +117,19 @@ CustomizerCtrls = React.createClass({
         </div>
         
         <div className={'row ptm pbl primary-color-choices ' + this.props.primaryColor.toLowerCase()}>
-          <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
+          <div className='col-xs-20p builder-ctrls-fabric-btn prs'>
             <div className='red-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(self, CustomizerConstants.Colors.RED)}></div>
           </div>
-          <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
+          <div className='col-xs-20p builder-ctrls-fabric-btn prs'>
             <div className='blue-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(self, CustomizerConstants.Colors.BLUE)}></div>
           </div>
-          <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
+          <div className='col-xs-20p builder-ctrls-fabric-btn prs'>
             <div className='tan-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(self, CustomizerConstants.Colors.TAN)}></div>
           </div>
-          <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
+          <div className='col-xs-20p builder-ctrls-fabric-btn prs'>
             <div className='burgundy-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(self, CustomizerConstants.Colors.BURGUNDY)}></div>
           </div>
-          <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
-            <div className='turquoise-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(self, CustomizerConstants.Colors.TURQUOISE)}></div>
-          </div>
-          <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
+          <div className='col-xs-20p builder-ctrls-fabric-btn prs'>
             <div className='black-fabric fabric-btn-inner' onClick={this.setPrimaryColor.bind(self, CustomizerConstants.Colors.BLACK)}></div>
           </div>
         </div>
@@ -143,22 +140,19 @@ CustomizerCtrls = React.createClass({
           </div>
           
           <div className={'ptm secondary-color-choices ' + secondaryColor}>
-            <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
+            <div className='col-xs-20p builder-ctrls-fabric-btn prs'>
               <div className='red-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(self, CustomizerConstants.Colors.RED)}></div>
             </div>
-            <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
+            <div className='col-xs-20p builder-ctrls-fabric-btn prs'>
               <div className='blue-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(self, CustomizerConstants.Colors.BLUE)}></div>
             </div>
-            <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
+            <div className='col-xs-20p builder-ctrls-fabric-btn prs'>
               <div className='tan-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(self, CustomizerConstants.Colors.TAN)}></div>
             </div>
-            <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
+            <div className='col-xs-20p builder-ctrls-fabric-btn prs'>
               <div className='burgundy-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(self, CustomizerConstants.Colors.BURGUNDY)}></div>
             </div>
-            <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
-              <div className='turquoise-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(self, CustomizerConstants.Colors.TURQUOISE)}></div>
-            </div>
-            <div className='col-xs-2 builder-ctrls-fabric-btn prs'>
+            <div className='col-xs-20p builder-ctrls-fabric-btn prs'>
               <div className='black-fabric fabric-btn-inner' onClick={this.setSecondaryColor.bind(self, CustomizerConstants.Colors.BLACK)}></div>
             </div>
           </div>

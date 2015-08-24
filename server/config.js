@@ -15,7 +15,7 @@ var path           = require('path'),
 --------------------------------------------------------------------------------*/
 
 // App Versioning
-Config.VERSION = '3.0.0';
+Config.VERSION = '3.0.4';
 // App Server Config
 Config.PORT            = process.env.PORT            || 1337;
 Config.VIEW_DIR        = process.env.VIEW_DIR        || 'views';
@@ -65,7 +65,7 @@ Config.initServer = function (server) {
           'saveUninitialized': true,
           'secret': Config.SESSION_SECRET
         }))
-        .use(morgan('tiny'));
+        .use(morgan([':date',':status',':remote-addr',':method',':url',':response-time'].join(' | ')));
 };
 
 module.exports = Config;
