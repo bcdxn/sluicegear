@@ -1276,7 +1276,6 @@ var OrderPreviewItem = React.createClass({displayName: "OrderPreviewItem",
 });
 
 module.exports = OrderPreviewItem;
-
 },{}],18:[function(require,module,exports){
 var OrderPreviewItem = require('../order-preview-item'),
     OrderPreviewList;
@@ -1724,7 +1723,6 @@ module.exports = CartConstants;
 var Dispatcher = require('flux').Dispatcher; 
 
 module.exports = new Dispatcher(); 
-
 },{"flux":41}],27:[function(require,module,exports){
 var Dispatcher     = require('../dispatcher'),
     CartConstants  = require('../constants/cart'),
